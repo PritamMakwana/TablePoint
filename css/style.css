@@ -31,14 +31,24 @@
   margin-left: 5%;
 }
 .loginform {
+  display: none;
   height: 75%;
   width: 100%;
   margin-top: 10%;
   margin-bottom: 10%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.create-account-form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 75%;
+  width: 100%;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .heading {
@@ -47,6 +57,10 @@
   font-weight: bold;
   text-align: center;
   margin-bottom: 5%;
+}
+.create-heading {
+  font-size: 35px !important;
+  margin-bottom: 1% !important;
 }
 
 form {
@@ -69,6 +83,12 @@ form {
 .form-control:hover {
   box-shadow: 5px 5px 0 0 #f6f7f6, 0 0 5px 5px #e5e5e55c !important;
 }
+.create-txtbox {
+  margin-top: 2% !important;
+  padding: 1% !important;
+  border-radius: 10px !important;
+  padding-left: 2% !important;
+}
 .btnSubmit {
   width: 20% !important;
   margin-top: 3% !important;
@@ -82,10 +102,37 @@ form {
   font-size: 20px;
   color: white !important;
 }
+.btnCreate {
+  width: 50% !important;
+  margin-top: 2% !important;
+  font-size: 15px !important;
+}
 .btnSubmit:focus {
   box-shadow: 2px 2px 2px 2px var(--prime), 0px 0px 5px 5px var(--prime) !important;
   background-color: white !important;
   color: var(--prime) !important;
+}
+
+.login_to_create {
+  text-align: center;
+  margin-top: 4%;
+}
+.login_to_create button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-weight: 450;
+  cursor: pointer;
+}
+.create-to-login {
+  margin-top: 2%;
+}
+.login_to_create button:focus {
+  color: var(--prime) !important;
+}
+.login_to_create button:hover {
+  color: var(--prime) !important;
+  text-shadow: 2px 2px 2px 2px var(--prime), 0px 0px 5px 5px var(--prime) !important;
 }
 
 .rightbg {
@@ -147,9 +194,17 @@ form {
     margin-top: 10% !important;
     padding: 3% !important;
   }
+  .create-txtbox {
+    margin-top: 5% !important;
+    padding: 1% !important;
+    padding-left: 2% !important;
+  }
   .btnSubmit {
     width: 70% !important;
     margin-top: 10% !important;
+  }
+  .btnCreate {
+    margin-top: 5% !important;
   }
 }
 @media only screen and (max-width: 500px) {
