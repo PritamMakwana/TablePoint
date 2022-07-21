@@ -43,7 +43,7 @@ if (isset($_SESSION['s_user_name'])) {
                                 <div class="login-err mt-3 col-md-12 d-flex justify-content-center">
                                     <div class="alert alert-danger alert-dismissible fade show alert-mod" role="alert">
                                         <?php echo $_GET['error']; ?>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="erorrClose()"></button>
                                     </div>
                                 </div>
                             <?php }
@@ -123,6 +123,10 @@ if (isset($_SESSION['s_user_name'])) {
                 } else {
                     x.type = "password";
                 }
+            }
+
+            function erorrClose() {
+                window.location.href = '<?php $homename ?>index.php';
             }
         </script>
     </body>
