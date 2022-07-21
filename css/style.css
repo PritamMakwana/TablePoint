@@ -31,7 +31,7 @@
   margin-left: 5%;
 }
 .loginform {
-  display: none;
+  display: flex;
   height: 75%;
   width: 100%;
   margin-top: 10%;
@@ -83,6 +83,17 @@ form {
 .form-control:hover {
   box-shadow: 5px 5px 0 0 #f6f7f6, 0 0 5px 5px #e5e5e55c !important;
 }
+.pass-Show {
+  text-align: center;
+  display: block;
+  margin-top: 1%;
+}
+.pass-Show input {
+  display: inline;
+}
+.pass-Show p {
+  display: inline;
+}
 .create-txtbox {
   margin-top: 2% !important;
   padding: 1% !important;
@@ -115,24 +126,28 @@ form {
 
 .login_to_create {
   text-align: center;
-  margin-top: 4%;
+  margin-top: 2%;
 }
-.login_to_create button {
+.login_to_create a {
   border: none;
   background-color: transparent;
   outline: none;
   font-weight: 450;
   cursor: pointer;
+  color: black !important;
+  text-decoration: none;
 }
 .create-to-login {
   margin-top: 2%;
 }
-.login_to_create button:focus {
+.login_to_create a:focus {
   color: var(--prime) !important;
+  text-decoration: none !important;
 }
-.login_to_create button:hover {
+.login_to_create a:hover {
   color: var(--prime) !important;
   text-shadow: 2px 2px 2px 2px var(--prime), 0px 0px 5px 5px var(--prime) !important;
+  text-decoration: none !important;
 }
 
 .rightbg {
