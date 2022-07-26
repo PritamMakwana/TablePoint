@@ -1,7 +1,8 @@
 <?php
+
 include "config.php";
 
-if (isset($_SESSION['s_user_name'])) {
+if (isset($_SESSION['a_username'])) {
     header("Location: {$homename}/item.php");
 } else {
 
@@ -28,7 +29,7 @@ if (isset($_SESSION['s_user_name'])) {
                             <h2 class="heading">Log in </h2>
                             <form class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
                                 <div>
-                                    <input type="text" class="form-control" name="Admin_Uname" placeholder="user name " required>
+                                    <input type="text" class="form-control" name="Admin_Uname" placeholder="username or mobile number" required>
                                 </div>
                                 <div>
                                     <input type="password" id="myInputPass" name="Admin_password" class="form-control" placeholder="password" required>
@@ -66,7 +67,7 @@ if (isset($_SESSION['s_user_name'])) {
         if (isset($_POST['login'])) {
             if (empty($_POST['Admin_Uname']) || empty($_POST['Admin_password'])) {
                 if (empty($_POST['Admin_Uname'])) {
-                    header("Location:{$homename}/index.php?error=User Name is required");
+                    header("Location:{$homename}/index.php?error=Username Or Mobile number Name is required");
                 } elseif (empty($_POST['Admin_password'])) {
                     header("Location:{$homename}/index.php?error=Password is required ");
                 }
@@ -83,24 +84,25 @@ if (isset($_SESSION['s_user_name'])) {
                 $userName = validation(mysqli_real_escape_string($conn, $_POST['Admin_Uname']));
                 $userPassword = validation(mysqli_real_escape_string($conn, $_POST['Admin_password']));
 
-                $sql = "SELECT `log_id`, `log_fname`, `log_lname`, `log_user_name`, `log_email`, `log_pwd`, `log_role` FROM `log_in` WHERE log_user_name = '$userName' AND log_pwd = '$userPassword'";
+                $sql = "SELECT * FROM `admin_login` WHERE `a_l_pwd` = '$userPassword' AND (`a_l_uname` = '$userName' OR `a_l_mobile` = '$userName')";
 
                 $result = mysqli_query($conn, $sql) or die("Query Failed.");
 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        session_start();
-                        $_SESSION["s_id"] = $row['log_id'];
-                        $_SESSION["s_fname"] = $row['log_fname'];
-                        $_SESSION["s_lname"] = $row['log_lname'];
-                        $_SESSION["s_user_name"] = $row['log_user_name'];
-                        $_SESSION["s_email"] = $row['log_email'];
-                        $_SESSION["s_pwd"] = $row['log_pwd'];
-                        $_SESSION["s_role"] = $row['log_role'];
+                        
+                        $_SESSION["a_id"] = $row['a_l_id'];
+                        $_SESSION["a_username"] = $row['a_l_uname'];
+                        $_SESSION["a_moblie"] = $row['a_l_mobile'];
+                        $_SESSION["a_pwd"] = $row['a_l_pwd'];
                         header("Location: {$homename}/item.php");
                     }
                 } else {
-                    header("Location:{$homename}/index.php?error=Invalid Username or Password ");
+                    if (is_numeric($_POST['Admin_Uname']) == 1) {
+                        header("Location:{$homename}/index.php?error=Invalid Mobile Number or Password ");
+                    } else {
+                        header("Location:{$homename}/index.php?error=Invalid Username or Password ");
+                    }
                 }
             }
         }

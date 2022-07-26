@@ -1,6 +1,6 @@
 <?php
 include "config.php";
-if (isset($_SESSION['s_user_name'])) {
+if (isset($_SESSION['username'])) {
     header("Location: {$homename}/item.php");
 } else {
 
@@ -24,19 +24,13 @@ if (isset($_SESSION['s_user_name'])) {
                         <h2 class="heading create-heading"> Create Account </h2>
                         <form class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <div>
-                                <input type="text" class="form-control create-txtbox" name="C_Fname" placeholder="first name " required>
+                                <input type="tel" class="form-control create-txtbox" pattern=".{10,10}" data-bs-toggle="tooltip" data-bs-placement="top" title="mobile number 10 digits required" name="C_Mobile" placeholder="mobile number" required>
                             </div>
                             <div>
-                                <input type="text" class="form-control create-txtbox" name="C_Lname" placeholder="last name " required>
+                                <input type="text" pattern=".{6,30}" required title="6 minimum input and 30 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" class="form-control create-txtbox" name="C_Uname" placeholder="user name ">
                             </div>
                             <div>
-                                <input type="email" class="form-control create-txtbox" data-bs-toggle="tooltip" data-bs-placement="top" title="name@example.com" name="C_Email" placeholder="email" required>
-                            </div>
-                            <div>
-                                <input type="text" pattern=".{6,}" required title="6 minimum input" class="form-control create-txtbox" name="C_Uname" placeholder="user name " required>
-                            </div>
-                            <div>
-                                <input type="password" pattern=".{6,}" required title="6 characters minimum" name="C_password" id="myInputPass" class="form-control create-txtbox" placeholder="password" required>
+                                <input type="password" pattern=".{6,40}" required title="6 minimum input and 40 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" name="C_Password" id="myInputPass" class="form-control create-txtbox" placeholder="password" required>
                             </div>
                             <div class="pass-Show">
                                 <input type="checkbox" onclick="showPass()">
@@ -71,38 +65,33 @@ if (isset($_SESSION['s_user_name'])) {
 
         <?php
         if (isset($_POST['create_Account'])) {
-            if (empty($_POST['C_Fname']) || empty($_POST['C_Lname']) || empty($_POST['C_Email']) || empty($_POST['C_Uname']) || $_POST['C_password'] == null) {
+            if (empty($_POST["C_Mobile"]) || empty($_POST["C_Uname"]) || empty($_POST["C_Password"]) == " ") {
                 header("Location:{$homename}/createAcc.php?error=All Fields must be entered");
-            } elseif (filter_var($_POST['C_Email'], FILTER_VALIDATE_EMAIL) === false) {
-                header("Location:{$homename}/createAcc.php?error= email is invalid format ( name@example.com )");
             } else {
 
-                $userFname = mysqli_real_escape_string($conn, $_POST['C_Fname']);
-                $userLname = mysqli_real_escape_string($conn, $_POST['C_Lname']);
-                $userEmail = mysqli_real_escape_string($conn, $_POST['C_Email']);
+                $userMoblie = mysqli_real_escape_string($conn, $_POST['C_Mobile']);
                 $userUname = mysqli_real_escape_string($conn, $_POST['C_Uname']);
-                $userPassword = mysqli_real_escape_string($conn, $_POST['C_password']);
-                $userRole = 3;
+                $userPassword = mysqli_real_escape_string($conn, $_POST['C_Password']);
 
-                // already Username or Email registration check 
-                $sqluser = "SELECT * FROM `log_in` WHERE log_user_name = '{$userUname}'";
-                $sqlemail = "SELECT * FROM `log_in` WHERE log_email = '{$userEmail}'";
+                // already Username or mobile  registration check 
+                $sqluser = "SELECT * FROM `customer_login` WHERE l_uname = '{$userUname}'";
+                $sqlmoblie = "SELECT * FROM `customer_login` WHERE l_mobile = '{$userMoblie}'";
 
                 $resultuser = mysqli_query($conn, $sqluser) or die("Query Failed .");
-                $resultemail = mysqli_query($conn, $sqlemail) or die("Query Failed .");
+                $resultmoblie = mysqli_query($conn, $sqlmoblie) or die("Query Failed .");
 
                 if (mysqli_num_rows($resultuser) > 0) {
                     if (mysqli_fetch_assoc($resultuser)) {
                         header("Location:{$homename}/createAcc.php?error= already Username registration ");
                     }
-                } else if (mysqli_num_rows($resultemail) > 0) {
-                    if (mysqli_fetch_assoc($resultemail)) {
-                        header("Location:{$homename}/createAcc.php?error= already Email registration");
+                } else if (mysqli_num_rows($resultmoblie) > 0) {
+                    if (mysqli_fetch_assoc($resultmoblie)) {
+                        header("Location:{$homename}/createAcc.php?error= already Mobile number registration");
                     }
                 } else {
 
                     //insert Data
-                    $sqlInsert = "INSERT INTO `log_in`(`log_fname`, `log_lname`, `log_user_name`, `log_email`, `log_pwd`, `log_role`) VALUES ( '{$userFname}','{$userLname}','{$userUname}','{$userEmail}','{$userPassword}',{$userRole} )";
+                    $sqlInsert = "INSERT INTO `customer_login`(`l_mobile`, `l_uname`, `l_pwd`) VALUES ( '$userMoblie','$userUname','$userPassword' )";
 
                     if (mysqli_query($conn, $sqlInsert)) {
                         header("Location: {$homename}/index.php");

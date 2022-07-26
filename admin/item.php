@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 
-if (!isset($_SESSION['s_user_name'])) {
+if (!isset($_SESSION['a_username'])) {
     header("Location: {$homename}/index.php");
 } else {
 
@@ -18,33 +18,11 @@ if (!isset($_SESSION['s_user_name'])) {
     </head>
 
     <body>
-        <?php
 
-        if ($_SESSION["s_role"] == '1') {
-        ?>
+        <div class="header">
+            <h1>ADMIN PANEL - <?php echo $_SESSION['a_username'] . "," . $_SESSION["a_id"] . "," . $_SESSION["a_moblie"] . "," . $_SESSION["a_pwd"]; ?></h1>
+        </div>
 
-            <div class="header">
-                <h1>ADMIN PANEL - <?php echo $_SESSION['s_user_name'] . "," . $_SESSION["s_role"]; ?></h1>
-            </div>
-
-
-        <?php
-        } elseif ($_SESSION["s_role"] == '2') {
-
-        ?>
-            <div class="header">
-                <h1>Worker PANEL - <?php echo $_SESSION['s_user_name'] . "," . $_SESSION["s_role"]; ?></h1>
-            </div>
-
-        <?php
-        } elseif ($_SESSION["s_role"] == '3') {
-            header("Location:{$homename}/index.php?error=you are customer please Log in customer side");
-            session_destroy();
-        } else {
-            header("Location:{$homename}/index.php?error=Your Role is unthinkable");
-            session_destroy();
-        }
-        ?>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <button type="submit" name="logout">logout</button>
         </form>

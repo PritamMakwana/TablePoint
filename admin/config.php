@@ -3,12 +3,12 @@
 
 <head>
 
-    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./library/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
 
 <body>
-    <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js">
+    <script src="./library/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js">
     </script>
 
 </body>
@@ -23,7 +23,7 @@ $homename = "http://localhost/TablePoint/admin";
 $hostName = "localhost";
 $userName = "root";
 $userPass = "";
-$DBname = "restaurantdb";
+$DBname = "TablePoint";
 $conn = mysqli_connect($hostName, $userName, $userPass, $DBname);
 
 if (mysqli_connect_error()) {
