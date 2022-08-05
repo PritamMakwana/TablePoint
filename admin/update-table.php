@@ -39,7 +39,7 @@ if (!isset($_SESSION['a_username'])) {
                     </div>
                     <div class="form-group">
                         <label>Table Number</label>
-                        <input type="number" min="0" max="999999999999" name="tablenumber" class="form-control" placeholder="Table number" value="<?php echo $row['t_number']; ?>" required>
+                        <input type="number" readonly="TRUE" min="0" max="999999999999" name="tablenumber" class="form-control" placeholder="Table number" value="<?php echo $row['t_number']; ?>" required>
                     </div>
                     <div class="form-group">
                         <label>chair</label>

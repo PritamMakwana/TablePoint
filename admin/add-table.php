@@ -5,7 +5,7 @@ if (!isset($_SESSION['a_username'])) {
 } else {
 
     if (isset($_POST['save'])) {
-        $tnumber= mysqli_real_escape_string($conn, $_POST['tablenumber']);
+        $tnumber = mysqli_real_escape_string($conn, $_POST['tablenumber']);
         $tchair = mysqli_real_escape_string($conn, $_POST['chair']);
         $tdesc = mysqli_real_escape_string($conn, $_POST['desc']);
 
@@ -17,9 +17,9 @@ if (!isset($_SESSION['a_username'])) {
             echo "<p style = 'color: red; text-align:center; margin :10px 0;' > table number already <p>";
         } else {
 
-            $sql1 = "INSERT INTO `tables`( `t_number`, `t_chair`, `t_desc`) VALUES ('$tnumber','$tchair','$tdesc')";
+            $sqladd = "INSERT INTO `tables`( `t_number`, `t_chair`, `t_desc`) VALUES ('$tnumber','$tchair','$tdesc')";
 
-            if (mysqli_query($conn, $sql1)) {
+            if (mysqli_query($conn, $sqladd)) {
 
                 header("Location: {$homename}/table.php");
             }

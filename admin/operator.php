@@ -23,6 +23,32 @@ if (!isset($_SESSION['a_username'])) {
                 <?php include "sidebar.php"; ?>
             </div>
             <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
+            <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
+                <div class="col-md-2">
+                    <a class="add-new" href="add-operator.php">Add operators</a>
+                </div>
+                <?php
+                $sTables = "SELECT * FROM operators ";
+                $resTables = mysqli_query($conn, $sTables) or die("Query Faild soperators." . mysqli_connect_error());
+
+                while ($row = mysqli_fetch_assoc($resTables)) {  ?>
+                    <div class="container text-center">
+                        <p><?php echo "operator id = ".$row['op_id']; ?> </p>
+                        <p><?php echo "operator uname = ".$row['op_uname']; ?> </p>
+                        <p><?php echo "operator mobile = ".$row['op_mobile']; ?> </p>
+                        <p><?php echo "operator pwd = ".$row['op_pwd']; ?> </p>
+                        <div class="row justify-content-end">
+                            <div class="col">
+                                <a href='update-operator.php?id=<?php echo $row["op_id"]; ?>'>update</a>
+                            </div>
+                            <div class="col">
+                                <a href='delete-operator.php?id=<?php echo $row["op_id"]; ?>'>delete</a>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php } ?>
+              
 
             </div>
         </div>
