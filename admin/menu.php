@@ -25,6 +25,10 @@ if (!isset($_SESSION['a_username'])) {
                 <?php include "sidebar.php"; ?>
             </div>
             <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
+            <div class="col-md-2">
+                    <a class="add-new" href="category.php">Categorys</a>
+            </div>
+
 
             </div>
         </div>
