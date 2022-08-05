@@ -94,12 +94,6 @@ form {
 .pass-Show p {
   display: inline;
 }
-.create-txtbox {
-  margin-top: 2% !important;
-  padding: 1% !important;
-  border-radius: 10px !important;
-  padding-left: 2% !important;
-}
 .btnSubmit {
   width: 20% !important;
   margin-top: 3% !important;

@@ -3,7 +3,7 @@
 include "config.php";
 
 if (isset($_SESSION['a_username'])) {
-    header("Location: {$homename}/item.php");
+    header("Location: {$homename}/table.php");
 } else {
 
 ?>
@@ -13,8 +13,7 @@ if (isset($_SESSION['a_username'])) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ADMIN | Login</title>
-
+        <title>Admin | Login</title>
         <head>
 
         <body>
@@ -95,7 +94,7 @@ if (isset($_SESSION['a_username'])) {
                         $_SESSION["a_username"] = $row['a_l_uname'];
                         $_SESSION["a_moblie"] = $row['a_l_mobile'];
                         $_SESSION["a_pwd"] = $row['a_l_pwd'];
-                        header("Location: {$homename}/item.php");
+                        header("Location: {$homename}/table.php");
                     }
                 } else {
                     if (is_numeric($_POST['Admin_Uname']) == 1) {

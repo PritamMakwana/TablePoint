@@ -4,7 +4,7 @@
 <head>
     <link href="./library/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php echo time(); ?>" />
-
+    <link rel="icon" type="image/x-icon" href="./images/only logo.png">
 <body>
     <script src="./library/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js">
     </script>
@@ -16,7 +16,7 @@
 session_start();
 session_regenerate_id(true);
 
-$homename = "http://localhost/TablePoint";
+$homename = "http://localhost:81/TablePoint";
 
 $hostName = "localhost";
 $userName = "root";

@@ -5,6 +5,7 @@
 
     <link href="./library/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="icon" type="image/x-icon" href="./images/only logo.png">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 session_start();
 session_regenerate_id(true);
 
-$homename = "http://localhost/TablePoint/admin";
+$homename = "http://localhost:81/TablePoint/admin";
 
 $hostName = "localhost";
 $userName = "root";

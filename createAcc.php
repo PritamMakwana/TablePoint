@@ -12,6 +12,7 @@ if (isset($_SESSION['username'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Customer | Create Account</title>
     </head>
 
     <body>
@@ -24,13 +25,13 @@ if (isset($_SESSION['username'])) {
                         <h2 class="heading create-heading"> Create Account </h2>
                         <form class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <div>
-                                <input type="tel" class="form-control create-txtbox" pattern=".{10,10}" data-bs-toggle="tooltip" data-bs-placement="top" title="mobile number 10 digits required" name="C_Mobile" placeholder="mobile number" required>
+                                <input type="tel" class="form-control " pattern=".{10,10}" data-bs-toggle="tooltip" data-bs-placement="top" title="mobile number 10 digits required" name="C_Mobile" placeholder="mobile number" required>
                             </div>
                             <div>
-                                <input type="text" pattern=".{6,30}" required title="6 minimum input and 30 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" class="form-control create-txtbox" name="C_Uname" placeholder="user name ">
+                                <input type="text" pattern=".{6,30}" required title="6 minimum input and 30 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" class="form-control " name="C_Uname" placeholder="user name ">
                             </div>
                             <div>
-                                <input type="password" pattern=".{6,40}" required title="6 minimum input and 40 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" name="C_Password" id="myInputPass" class="form-control create-txtbox" placeholder="password" required>
+                                <input type="password" pattern=".{6,40}" required title="6 minimum input and 40 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" name="C_Password" id="myInputPass" class="form-control " placeholder="password" required>
                             </div>
                             <div class="pass-Show">
                                 <input type="checkbox" onclick="showPass()">
@@ -68,12 +69,11 @@ if (isset($_SESSION['username'])) {
             if (empty($_POST["C_Mobile"]) || empty($_POST["C_Uname"]) || empty($_POST["C_Password"]) == " ") {
                 header("Location:{$homename}/createAcc.php?error=All Fields must be entered");
             } else {
-
                 $userMoblie = mysqli_real_escape_string($conn, $_POST['C_Mobile']);
                 $userUname = mysqli_real_escape_string($conn, $_POST['C_Uname']);
                 $userPassword = mysqli_real_escape_string($conn, $_POST['C_Password']);
 
-                // already Username or mobile  registration check 
+                // already Username or mobile number registration check 
                 $sqluser = "SELECT * FROM `customer_login` WHERE l_uname = '{$userUname}'";
                 $sqlmoblie = "SELECT * FROM `customer_login` WHERE l_mobile = '{$userMoblie}'";
 
