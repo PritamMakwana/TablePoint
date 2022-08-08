@@ -11,6 +11,13 @@ if (!isset($_SESSION['a_username'])) {
 
         $error = array();
 
+        $delete_img= $_POST['old_image'];
+        $sql1= "SELECT * FROM items WHERE item_img = '$delete_img' ";
+        $result = mysqli_query($conn,$sql1)  or die("Query Faild : select ". "  ".$sql1 );
+        $row = mysqli_fetch_assoc($result);
+
+        unlink("upload/".$row['item_img']); //using this function folder in file delete
+
         $file_name = $_FILES['new-image']['name'];
         $file_size = $_FILES['new-image']['size'];
         $file_tmp = $_FILES['new-image']['tmp_name'];
@@ -50,5 +57,4 @@ if (!isset($_SESSION['a_username'])) {
         echo "<div class = 'alert alert-danger' >Query Faild.</div> ";
     }
 }
-
 ?>
