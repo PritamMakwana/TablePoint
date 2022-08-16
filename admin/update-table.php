@@ -11,13 +11,40 @@ if (!isset($_SESSION['a_username'])) {
         $tchair = mysqli_real_escape_string($conn, $_POST['chair']);
         $tdesc = mysqli_real_escape_string($conn, $_POST['desc']);
 
+        $mSelect  = "SELECT * FROM tables WHERE t_id = {$_POST['t_id']}";
+        $mResult = mysqli_query($conn, $mSelect) or die("Query Faild select 1." . mysqli_connect_error(0));
+
+        if (mysqli_num_rows($mResult) > 0) {
+            while ($row = mysqli_fetch_assoc($mResult)) {
+                $old_tid = $row['t_id'];
+                $old_tnum = $row['t_number'];
+                $old_tchair = $row['t_chair'];
+                $old_tdesc = $row['t_desc'];
+            }
+        }
+
         $sql = "UPDATE `tables` SET `t_number`= $tnumber,`t_chair`=$tchair,`t_desc`= '$tdesc' WHERE `t_id`= $tid ";
 
-        $result = mysqli_query($conn, $sql) or die("Query Failed update." .$sql);
+        $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
-        if (mysqli_query($conn, $sql)) {
+        $TableNumber =  $_POST['tablenumber'];
+        $table_num = "SELECT * FROM  tables WHERE t_number = '$TableNumber'";
+        $Number_result = mysqli_query($conn, $table_num) or die("Query Failed select table number.");
 
-            header("Location:{$homename}/table.php");
+        if ($result) {
+            if (mysqli_num_rows($Number_result) >= 2) {
+                if (mysqli_num_rows($Number_result) >= 2) {
+                    if (mysqli_fetch_assoc($Number_result)) {
+                        $sqlmob = "UPDATE `tables` SET `t_number`='$old_tnum' WHERE `t_id`='$old_tid'";
+                        $resultmob =  mysqli_query($conn, $sqlmob) or die("Query Failed update.");
+                        if ($resultmob) {
+                            header("Location:{$homename}/update-table.php?id={$_POST['t_id']}&error=Table number is already given");
+                        }
+                    }
+                }
+            } else {
+                header("Location:{$homename}/table.php");
+            }
         }
     }
 
@@ -39,7 +66,7 @@ if (!isset($_SESSION['a_username'])) {
                     </div>
                     <div class="form-group">
                         <label>Table Number</label>
-                        <input type="number" readonly="TRUE" min="0" max="999999999999" name="tablenumber" class="form-control" placeholder="Table number" value="<?php echo $row['t_number']; ?>" required>
+                        <input type="number" min="0" max="999999999999" name="tablenumber" class="form-control" placeholder="Table number" value="<?php echo $row['t_number']; ?>" required>
                     </div>
                     <div class="form-group">
                         <label>chair</label>
@@ -47,9 +74,20 @@ if (!isset($_SESSION['a_username'])) {
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <input type="text" name="desc" class="form-control" placeholder="Description of table" value="<?php echo $row['t_desc']; ?>" >
+                        <input type="text" name="desc" class="form-control" placeholder="Description of table" value="<?php echo $row['t_desc']; ?>">
                     </div>
                     <input type="submit" name="submit" class="btn btn-primary" value="update" required />
+
+                    <?php if (isset($_GET['error'])) {
+                    ?>
+                        <div class="login-err mt-1 col-md-12 d-flex justify-content-center">
+                            <div class="alert alert-danger alert-dismissible fade show alert-mod" role="alert">
+                                <?php echo $_GET['error']; ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="erorrClose()"></button>
+                            </div>
+                        </div>
+                    <?php }
+                    ?>
                 </form>
                 <!-- Form End-->
             </div>
@@ -59,3 +97,8 @@ if (!isset($_SESSION['a_username'])) {
     }
 }
 ?>
+<script>
+    function erorrClose() {
+        window.location.href = '<?php $homename ?>update-table.php?id=<?php echo $table_id ?>';
+    }
+</script>

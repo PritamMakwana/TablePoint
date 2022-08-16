@@ -14,7 +14,7 @@ if (!isset($_SESSION['a_username'])) {
         $result = mysqli_query($conn, $sql) or die("Query Failed select .");
 
         if (mysqli_num_rows($result) > 0) {
-            echo "<p style = 'color: red; text-align:center; margin :10px 0;' > table number already <p>";
+            echo "<p style = 'color: red; text-align:center; margin :10px 0;' > Table number is already given <p>";
         } else {
 
             $sqladd = "INSERT INTO `tables`( `t_number`, `t_chair`, `t_desc`) VALUES ('$tnumber','$tchair','$tdesc')";
