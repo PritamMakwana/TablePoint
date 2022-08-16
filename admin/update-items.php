@@ -6,7 +6,7 @@ if (!isset($_SESSION['a_username'])) {
 
     $item_id = $_GET['id'];
 
-    $sql = "SELECT items.item_id, items.item_title, items.item_desc, items.food_category, items.item_img,food_category.cate_name, food_category.cate_name,food_category.cate_id FROM items 
+    $sql = "SELECT items.item_id, items.item_title, items.item_price, items.item_desc, items.food_category, items.item_img,food_category.cate_name, food_category.cate_name,food_category.cate_id FROM items 
     LEFT JOIN food_category ON items.food_category = food_category.cate_id
     WHERE items.item_id = {$item_id}";
 
@@ -56,9 +56,14 @@ if (!isset($_SESSION['a_username'])) {
                 </div>
                 <div class="form-group">
                     <label>Food Item image</label>
-                    <input type="file" name="new-image">
+                    <input type="file" name="new-image" id="image">
+                    <div id="preview"></div>
                     <img src="upload/<?php echo  $row['item_img']; ?>" height="150px">
                     <input type="hidden" name="old_image" value="<?php echo  $row['item_img']; ?>">
+                </div>
+                <div class="form-group">
+                    <label>Food Item Price</label>
+                    <input type="number" name="item_price" value="<?php echo  $row['item_price']; ?>" class="form-control" required>
                 </div>
                 <input type="submit" name="updateItem" class="btn btn-primary" value="Update Item" required />
             </form>
@@ -73,3 +78,17 @@ if (!isset($_SESSION['a_username'])) {
 <?php
 }
 ?>
+<script>
+    function imagePreview(fileInput) {
+        if (fileInput.files && fileInput.files[0]) {
+            var fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                $('#preview').html('<img src="' + event.target.result + '" width="150px" height="150px"/>');
+            };
+            fileReader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+    $("#image").change(function() {
+        imagePreview(this);
+    });
+</script>

@@ -44,7 +44,7 @@ if (!isset($_SESSION['a_username'])) {
         }
     }
 
-    $sql = "UPDATE items SET item_title ='{$_POST["item_title"]}',item_desc='{$_POST["item_desc"]}' , food_category = {$_POST["category"]} , item_img='{$image_name}' WHERE item_id ={$_POST["item_id"]} ; ";
+    $sql = "UPDATE items SET item_title ='{$_POST["item_title"]}',item_price = '{$_POST["item_price"]}',item_desc='{$_POST["item_desc"]}' , food_category = {$_POST["category"]} , item_img='{$image_name}' WHERE item_id ={$_POST["item_id"]} ; ";
 
     if ($_POST['old_category'] != $_POST["category"]) {
         $sql .= "UPDATE food_category SET`items`=`items` - 1  WHERE cate_id = {$_POST['old_category']};";
@@ -57,4 +57,3 @@ if (!isset($_SESSION['a_username'])) {
         echo "<div class = 'alert alert-danger' >Query Faild.</div> ";
     }
 }
-?>

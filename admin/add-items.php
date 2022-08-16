@@ -9,7 +9,7 @@ if (!isset($_SESSION['a_username'])) {
     <form action="save-items.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label>Food Item Title</label>
-            <input type="text" name="item_title" class="form-control" autocomplete="off" required>
+            <input type="text" name="item_title" class="form-control" required>
         </div>
         <div class="form-group">
             <label>Description</label>
@@ -35,8 +35,13 @@ if (!isset($_SESSION['a_username'])) {
             </select>
         </div>
         <div class="form-group">
+            <label>Food Item Price</label>
+            <input type="number" name="item_price" class="form-control" required>
+        </div>
+        <div class="form-group">
             <label>Food Item image</label>
-            <input type="file" name="fileToUpload" required>
+            <input type="file" name="fileToUpload" id="image" required>
+            <div id="preview"></div>
         </div>
         <input type="submit" name="addItem" class="btn btn-primary" value="ADD Item" required />
     </form>
@@ -45,3 +50,18 @@ if (!isset($_SESSION['a_username'])) {
 <?php
 }
 ?>
+
+<script>
+    function imagePreview(fileInput) {
+        if (fileInput.files && fileInput.files[0]) {
+            var fileReader = new FileReader();
+            fileReader.onload = function(event) {
+                $('#preview').html('<img src="' + event.target.result + '" width="150px" height="150px"/>');
+            };
+            fileReader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+    $("#image").change(function() {
+        imagePreview(this);
+    });
+</script>

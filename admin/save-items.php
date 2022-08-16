@@ -37,9 +37,10 @@ if (empty($error) == true) {
 
 $title = mysqli_real_escape_string($conn, $_POST['item_title']);
 $description = mysqli_real_escape_string($conn, $_POST['item_desc']);
+$price = mysqli_real_escape_string($conn, $_POST['item_price']);
 $category = mysqli_real_escape_string($conn, $_POST['category']);
 
-$sql = "INSERT INTO `items`(`item_title`, `item_img`, `item_desc`, `food_category`) VALUES ('$title','$new_name','$description','$category') ;";
+$sql = "INSERT INTO `items`(`item_title`, `item_img`, `item_price`, `item_desc`, `food_category`) VALUES ('$title','$new_name','$price','$description','$category') ;";
 //to query used ; in frist query end
 $sql .= "UPDATE food_category SET `items`=`items` + 1 WHERE cate_id = {$category}";
 
@@ -50,4 +51,3 @@ echo "<div class = 'alert alert-danger' >Query Faild.</div> ";
 }
 
 }
-?>
