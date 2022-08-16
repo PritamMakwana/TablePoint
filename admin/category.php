@@ -40,6 +40,9 @@ if (!isset($_SESSION['a_username'])) {
                         <p><?php echo "category items = " . $row['items']; ?> </p>
                         <div class="row justify-content-end">
                             <div class="col">
+                                <a href='update-category.php?id=<?php echo $row["cate_id"]; ?>'>update</a>
+                            </div>
+                            <div class="col">
                                 <a href='delete-category.php?id=<?php echo $row["cate_id"]; ?>'>delete category</a>
                             </div>
                         </div>

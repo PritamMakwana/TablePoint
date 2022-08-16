@@ -33,10 +33,10 @@ if (!isset($_SESSION['a_username'])) {
 
                 while ($row = mysqli_fetch_assoc($resTables)) {  ?>
                     <div class="container text-center">
-                        <p><?php echo "table id = ".$row['t_id']; ?> </p>
-                        <p><?php echo "table no = ".$row['t_number']; ?> </p>
-                        <p><?php echo "table chair = ".$row['t_chair']; ?> </p>
-                        <p><?php echo "table desc = ".$row['t_desc']; ?> </p>
+                        <p><?php echo "table id = " . $row['t_id']; ?> </p>
+                        <p><?php echo "table no = " . $row['t_number']; ?> </p>
+                        <p><?php echo "table chair = " . $row['t_chair']; ?> </p>
+                        <p><?php echo "table desc = " . $row['t_desc']; ?> </p>
                         <div class="row justify-content-end">
                             <div class="col">
                                 <a href='update-table.php?id=<?php echo $row["t_id"]; ?>'>update</a>
@@ -51,12 +51,6 @@ if (!isset($_SESSION['a_username'])) {
                 <?php
 
                 ?>
-
-
-
-
-
-
             </div>
         </div>
 

@@ -12,7 +12,7 @@ if (!isset($_SESSION['a_username'])) {
         $result = mysqli_query($conn, $sql) or die("update query is failed");
 
         if (mysqli_num_rows($result) > 0) {
-            echo "<p style = 'color: red; text-align:center; margin :10px 0;' > food  category already Exists.<p>";
+            echo "<p style = 'color: red; text-align:center; margin :10px 0;' > food category already Exists.<p>";
         } else {
 
             $sqladd = "INSERT INTO `food_category` (`cate_name`) VALUES ('$food_category_name')";
