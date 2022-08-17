@@ -45,6 +45,9 @@ if (!isset($_SESSION['a_username'])) {
                             <div class="col">
                                 <a href='delete-category.php?id=<?php echo $row["cate_id"]; ?>'>delete category</a>
                             </div>
+                            <div class="col">
+                                <a href='category-wise-items.php?id=<?php echo $row["cate_id"]; ?>'>category wise items</a>
+                            </div>
                         </div>
                         <hr>
                     </div>
