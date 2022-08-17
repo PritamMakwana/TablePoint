@@ -65,6 +65,7 @@ if (!isset($_SESSION['a_username'])) {
                     <label>Food Item Price</label>
                     <input type="number" name="item_price" value="<?php echo  $row['item_price']; ?>" class="form-control" required>
                 </div>
+                <input type="button" name="back" class="btn btn-primary" value="Back" onclick="closePage()" />
                 <input type="submit" name="updateItem" class="btn btn-primary" value="Update Item" required />
             </form>
             <!--/Form -->
@@ -91,4 +92,8 @@ if (!isset($_SESSION['a_username'])) {
     $("#image").change(function() {
         imagePreview(this);
     });
+
+    function closePage() {
+        window.location.href = '<?php $homename ?>menu.php';
+    }
 </script>

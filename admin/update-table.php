@@ -76,6 +76,7 @@ if (!isset($_SESSION['a_username'])) {
                         <label>Description</label>
                         <input type="text" name="desc" class="form-control" placeholder="Description of table" value="<?php echo $row['t_desc']; ?>">
                     </div>
+                    <input type="button" name="back" class="btn btn-primary" value="Back" onclick="closePage()" />
                     <input type="submit" name="submit" class="btn btn-primary" value="update" required />
 
                     <?php if (isset($_GET['error'])) {
@@ -100,5 +101,9 @@ if (!isset($_SESSION['a_username'])) {
 <script>
     function erorrClose() {
         window.location.href = '<?php $homename ?>update-table.php?id=<?php echo $table_id ?>';
+    }
+
+    function closePage() {
+        window.location.href = '<?php $homename ?>table.php';
     }
 </script>

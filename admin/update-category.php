@@ -65,6 +65,7 @@ if (!isset($_SESSION['a_username'])) {
                         <label>Food Category Name</label>
                         <input type="text" name="f_cate" max="100" class="form-control" placeholder="Food Category Name" value="<?php echo $row['cate_name']; ?>" required>
                     </div>
+                    <input type="button" name="back" class="btn btn-primary" value="Back" onclick="closePage()" />
                     <input type="submit" name="submit" class="btn btn-primary" value="update" required />
 
                     <?php if (isset($_GET['error'])) {
@@ -89,5 +90,9 @@ if (!isset($_SESSION['a_username'])) {
 <script>
     function erorrClose() {
         window.location.href = '<?php $homename ?>update-category.php?id=<?php echo $category_id ?>';
+    }
+
+    function closePage() {
+        window.location.href = '<?php $homename ?>category.php';
     }
 </script>

@@ -98,6 +98,7 @@ if (!isset($_SESSION['a_username'])) {
                         <p>show password
                         <p>
                     </div>
+                    <input type="button" name="back" class="btn btn-primary" value="Back" onclick="closePage()" />
                     <input type="submit" name="submit" class="btn btn-primary" value="Update" required />
                     <?php if (isset($_GET['error'])) {
                     ?>
@@ -131,5 +132,9 @@ if (!isset($_SESSION['a_username'])) {
 
     function erorrClose() {
         window.location.href = '<?php $homename ?>update-operator.php?id=<?php echo $op_id ?>';
+    }
+
+    function closePage() {
+        window.location.href = '<?php $homename ?>operator.php';
     }
 </script>
