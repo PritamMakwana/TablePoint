@@ -4,6 +4,8 @@ include "config.php";
 
 if (isset($_SESSION['a_username'])) {
     header("Location: {$homename}/table.php");
+} elseif (isset($_SESSION['o_username'])) {
+    header("Location: {$homename}/zop-table.php");
 } else {
 
 ?>
@@ -14,6 +16,7 @@ if (isset($_SESSION['a_username'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin | Login</title>
+
         <head>
 
         <body>
@@ -83,18 +86,29 @@ if (isset($_SESSION['a_username'])) {
                 $userName = validation(mysqli_real_escape_string($conn, $_POST['Admin_Uname']));
                 $userPassword = validation(mysqli_real_escape_string($conn, $_POST['Admin_password']));
 
-                $sql = "SELECT * FROM `admin_login` WHERE `a_l_pwd` = '$userPassword' AND (`a_l_uname` = '$userName' OR `a_l_mobile` = '$userName')";
+                $sqlAdmin = "SELECT * FROM `admin_login` WHERE `a_l_pwd` = '$userPassword' AND (`a_l_uname` = '$userName' OR `a_l_mobile` = '$userName')";
 
-                $result = mysqli_query($conn, $sql) or die("Query Failed.");
+                $resultAdmin = mysqli_query($conn, $sqlAdmin) or die("Query Failed.");
 
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        
+                $sqlOperator = "SELECT * FROM `operators` WHERE `op_pwd` = '$userPassword' AND (`op_uname` = '$userName' OR `op_mobile` = '$userName')";
+
+                $resultOperator = mysqli_query($conn, $sqlOperator) or die("Query Failed.");
+
+                if (mysqli_num_rows($resultAdmin) > 0) {
+                    while ($row = mysqli_fetch_assoc($resultAdmin)) {
                         $_SESSION["a_id"] = $row['a_l_id'];
                         $_SESSION["a_username"] = $row['a_l_uname'];
                         $_SESSION["a_moblie"] = $row['a_l_mobile'];
                         $_SESSION["a_pwd"] = $row['a_l_pwd'];
                         header("Location: {$homename}/table.php");
+                    }
+                } else if (mysqli_num_rows($resultOperator) > 0) {
+                    while ($row = mysqli_fetch_assoc($resultOperator)) {
+                        $_SESSION["o_id"] = $row['op_id'];
+                        $_SESSION["o_username"] = $row['op_uname'];
+                        $_SESSION["o_moblie"] = $row['op_mobile'];
+                        $_SESSION["o_pwd"] = $row['op_pwd'];
+                        header("Location: {$homename}/zop-table.php");
                     }
                 } else {
                     if (is_numeric($_POST['Admin_Uname']) == 1) {
