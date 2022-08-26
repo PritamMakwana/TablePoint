@@ -31,10 +31,10 @@ if (isset($_SESSION['a_username'])) {
                             <h2 class="heading">Log in </h2>
                             <form class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
                                 <div>
-                                    <input type="text" class="form-control" name="Admin_Uname" placeholder="username or mobile number" required>
+                                    <input type="text" class="form-control loginTb" name="Admin_Uname" placeholder="username or mobile number" required>
                                 </div>
                                 <div>
-                                    <input type="password" id="myInputPass" name="Admin_password" class="form-control" placeholder="password" required>
+                                    <input type="password" id="myInputPass" name="Admin_password" class="form-control loginTb" placeholder="password" required>
                                 </div>
                                 <div class="pass-Show">
                                     <input type="checkbox" onclick="showPass()">

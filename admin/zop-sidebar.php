@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +17,7 @@
   flex-direction: column; text-decoration: none;">
             <a style="text-decoration: none;" href="zop-table.php">Table</a>
             <a style="text-decoration: none;" href="zop-menu.php">Menu</a>
+            <a style="text-decoration: none;" href="zop-bill.php">Bill</a>
         </div>
 
 

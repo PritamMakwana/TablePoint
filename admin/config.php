@@ -4,7 +4,7 @@
 <head>
 
     <link href="./library/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css?<?php echo time(); ?>" />
     <link rel="icon" type="image/x-icon" href="./images/only logo.png">
     <script src="./library/jquery-3.6.0/jquery.min.js"></script>
 </head>

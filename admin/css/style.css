@@ -49,11 +49,11 @@
   margin-bottom: 5%;
 }
 
-form {
+.form {
   text-align: center;
   width: 100% !important;
 }
-.form-control {
+.loginTb {
   width: 50% !important;
   margin-top: 3% !important;
   padding: 2% !important;
@@ -63,10 +63,10 @@ form {
   box-shadow: 8px 8px 0 0 #e5e5e55c, 0 0 8px 8px #f6f7f6;
   transition: 0.1s !important;
 }
-.form-control:focus {
+.loginTb:focus {
   box-shadow: 5px 5px 0 0 #f6f7f6, 0 0 5px 5px #e5e5e55c !important;
 }
-.form-control:hover {
+.loginTb:hover {
   box-shadow: 5px 5px 0 0 #f6f7f6, 0 0 5px 5px #e5e5e55c !important;
 }
 .pass-Show {
@@ -167,7 +167,7 @@ form {
   }
 }
 @media only screen and (max-width: 700px) {
-  .form-control {
+  .loginTb {
     width: 70% !important;
     margin-top: 10% !important;
     padding: 3% !important;
@@ -183,10 +183,23 @@ form {
   }
 }
 /* input number at time up and down arrow not show */
-input[type=number]::-webkit-inner-spin-button, 
+/* input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     margin: 0; 
+} */
+.bill-input{
+  background-color: #ffb30e;
+  width: 100% !important;
+  float: left !important;
+}
+.sideofitems{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffb30e;
+  width: 50% !important;
+  float: left !important;
 }

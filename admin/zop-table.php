@@ -24,6 +24,7 @@ if (!isset($_SESSION['o_username'])) {
                 <?php include "zop-sidebar.php"; ?>
             </div>
             <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
+            <button id="print_req">Click to print</button>
                 <?php
                 $sTables = "SELECT * FROM tables ";
                 $resTables = mysqli_query($conn, $sTables) or die("Query Faild sTables." . mysqli_connect_error());
@@ -31,12 +32,10 @@ if (!isset($_SESSION['o_username'])) {
                 while ($row = mysqli_fetch_assoc($resTables)) {  ?>
                     <div class="container text-center">
                         <p><?php echo "table id = " . $row['t_id']; ?> </p>
-                        <p><?php echo "table no = " . $row['t_number']; ?> </p>
+                        <p><?php echo "table no or name = " . $row['t_name_or_num']; ?> </p>
                         <p><?php echo "table chair = " . $row['t_chair']; ?> </p>
-                        <p><?php echo "table desc = " . $row['t_desc']; ?> </p>
                         <hr>
                     </div>
-
                 <?php } ?>
                 <?php
 
@@ -47,6 +46,16 @@ if (!isset($_SESSION['o_username'])) {
     <?php
 }
     ?>
+    <script>
+        $(document).ready(function() {
+            $("#print_req").click(function() {
+                $("#print_req").css("display", "none");
+                window.print();
+            });
+            $("#print_req").css("display", "block");
+            return false;
+        });
+    </script>
     </body>
 
     </html>

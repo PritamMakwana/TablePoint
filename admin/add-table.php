@@ -5,11 +5,10 @@ if (!isset($_SESSION['a_username'])) {
 } else {
 
     if (isset($_POST['save'])) {
-        $tnumber = mysqli_real_escape_string($conn, $_POST['tablenumber']);
+        $tnumber = mysqli_real_escape_string($conn, $_POST['table_number_name']);
         $tchair = mysqli_real_escape_string($conn, $_POST['chair']);
-        $tdesc = mysqli_real_escape_string($conn, $_POST['desc']);
 
-        $sql = "SELECT * FROM  tables WHERE t_number = $tnumber ";
+        $sql = "SELECT * FROM  tables WHERE t_name_or_num = '$tnumber' ";
 
         $result = mysqli_query($conn, $sql) or die("Query Failed select .");
 
@@ -17,7 +16,7 @@ if (!isset($_SESSION['a_username'])) {
             echo "<p style = 'color: red; text-align:center; margin :10px 0;' > Table number is already given <p>";
         } else {
 
-            $sqladd = "INSERT INTO `tables`( `t_number`, `t_chair`, `t_desc`) VALUES ('$tnumber','$tchair','$tdesc')";
+            $sqladd = "INSERT INTO `tables`( `t_name_or_num`, `t_chair`) VALUES ('$tnumber','$tchair')";
 
             if (mysqli_query($conn, $sqladd)) {
 
@@ -32,16 +31,12 @@ if (!isset($_SESSION['a_username'])) {
         <!-- Form Start -->
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
             <div class="form-group">
-                <label>Table Number</label>
-                <input type="number" min="0" max="999999999999" name="tablenumber" class="form-control" placeholder="Table number" required>
+                <label>Table Name/Table Number:</label>
+                <input type="text" min="0" max="999999999999" name="table_number_name" class="form-control" placeholder="Table number" required>
             </div>
             <div class="form-group">
                 <label>chair</label>
                 <input type="number" min="0" max="999999999999" name="chair" class="form-control" placeholder="Number of chairs provided for the table " required>
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <input type="text" name="desc" class="form-control" placeholder="Description of table">
             </div>
             <input type="submit" name="save" class="btn btn-primary" value="Save" required />
         </form>

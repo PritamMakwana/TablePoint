@@ -7,9 +7,8 @@ if (!isset($_SESSION['a_username'])) {
 
     if (isset($_POST['submit'])) {
         $tid = mysqli_real_escape_string($conn, $_POST['t_id']);
-        $tnumber = mysqli_real_escape_string($conn, $_POST['tablenumber']);
+        $tnumber = mysqli_real_escape_string($conn, $_POST['table_number_name']);
         $tchair = mysqli_real_escape_string($conn, $_POST['chair']);
-        $tdesc = mysqli_real_escape_string($conn, $_POST['desc']);
 
         $mSelect  = "SELECT * FROM tables WHERE t_id = {$_POST['t_id']}";
         $mResult = mysqli_query($conn, $mSelect) or die("Query Faild select 1." . mysqli_connect_error(0));
@@ -17,28 +16,27 @@ if (!isset($_SESSION['a_username'])) {
         if (mysqli_num_rows($mResult) > 0) {
             while ($row = mysqli_fetch_assoc($mResult)) {
                 $old_tid = $row['t_id'];
-                $old_tnum = $row['t_number'];
+                $old_tnum = $row['t_name_or_num'];
                 $old_tchair = $row['t_chair'];
-                $old_tdesc = $row['t_desc'];
             }
         }
 
-        $sql = "UPDATE `tables` SET `t_number`= $tnumber,`t_chair`=$tchair,`t_desc`= '$tdesc' WHERE `t_id`= $tid ";
+        $sql = "UPDATE `tables` SET `t_name_or_num`= '$tnumber',`t_chair`=$tchair WHERE `t_id`= $tid ";
 
         $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
-        $TableNumber =  $_POST['tablenumber'];
-        $table_num = "SELECT * FROM  tables WHERE t_number = '$TableNumber'";
+        $TableNumber =  $_POST['table_number_name'];
+        $table_num = "SELECT * FROM  tables WHERE t_name_or_num = '$TableNumber'";
         $Number_result = mysqli_query($conn, $table_num) or die("Query Failed select table number.");
 
         if ($result) {
             if (mysqli_num_rows($Number_result) >= 2) {
                 if (mysqli_num_rows($Number_result) >= 2) {
                     if (mysqli_fetch_assoc($Number_result)) {
-                        $sqlmob = "UPDATE `tables` SET `t_number`='$old_tnum' WHERE `t_id`='$old_tid'";
+                        $sqlmob = "UPDATE `tables` SET `t_name_or_num`='$old_tnum' WHERE `t_id`='$old_tid'";
                         $resultmob =  mysqli_query($conn, $sqlmob) or die("Query Failed update.");
                         if ($resultmob) {
-                            header("Location:{$homename}/update-table.php?id={$_POST['t_id']}&error=Table number is already given");
+                            header("Location:{$homename}/update-table.php?id={$_POST['t_id']}&error=Table number or Table name is already given");
                         }
                     }
                 }
@@ -65,16 +63,12 @@ if (!isset($_SESSION['a_username'])) {
                         <input type="hidden" name="t_id" class="form-control" value="<?php echo $row['t_id']; ?>" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label>Table Number</label>
-                        <input type="number" min="0" max="999999999999" name="tablenumber" class="form-control" placeholder="Table number" value="<?php echo $row['t_number']; ?>" required>
+                        <label>Table Name/Table Number :</label>
+                        <input type="text" min="0" max="999999999999" name="table_number_name" class="form-control" placeholder="Table number Or name" value="<?php echo $row['t_name_or_num']; ?>" required>
                     </div>
                     <div class="form-group">
                         <label>chair</label>
                         <input type="number" min="0" max="999999999999" name="chair" class="form-control" placeholder="Number of chairs provided for the table " value="<?php echo $row['t_chair']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" name="desc" class="form-control" placeholder="Description of table" value="<?php echo $row['t_desc']; ?>">
                     </div>
                     <input type="button" name="back" class="btn btn-primary" value="Back" onclick="closePage()" />
                     <input type="submit" name="submit" class="btn btn-primary" value="update" required />

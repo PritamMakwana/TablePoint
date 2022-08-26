@@ -25,13 +25,13 @@ if (isset($_SESSION['username'])) {
                         <h2 class="heading create-heading"> Create Account </h2>
                         <form class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <div>
-                                <input type="tel" class="form-control " pattern=".{10,10}" data-bs-toggle="tooltip" data-bs-placement="top" title="mobile number 10 digits required" name="C_Mobile" placeholder="mobile number" required>
+                                <input type="tel" class="form-control loginTb" pattern=".{10,10}" data-bs-toggle="tooltip" data-bs-placement="top" title="mobile number 10 digits required" name="C_Mobile" placeholder="mobile number" required>
                             </div>
                             <div>
-                                <input type="text" pattern=".{6,30}" required title="6 minimum input and 30 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" class="form-control " name="C_Uname" placeholder="user name ">
+                                <input type="text" pattern=".{6,30}" required title="6 minimum input and 30 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" class="form-control loginTb" name="C_Uname" placeholder="user name ">
                             </div>
                             <div>
-                                <input type="password" pattern=".{6,40}" required title="6 minimum input and 40 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" name="C_Password" id="myInputPass" class="form-control " placeholder="password" required>
+                                <input type="password" pattern=".{6,40}" required title="6 minimum input and 40 maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" name="C_Password" id="myInputPass" class="form-control loginTb" placeholder="password" required>
                             </div>
                             <div class="pass-Show">
                                 <input type="checkbox" onclick="showPass()">

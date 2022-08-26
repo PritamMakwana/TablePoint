@@ -26,10 +26,10 @@ if (isset($_SESSION['username'])) {
                         <h2 class="heading"> Log in </h2>
                         <form class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <div>
-                                <input type="text" class="form-control" name="CL_Uname" placeholder="username or mobile number" required>
+                                <input type="text" class="form-control loginTb" name="CL_Uname" placeholder="username or mobile number" required>
                             </div>
                             <div>
-                                <input type="password" name="CL_password" class="form-control" placeholder="password" id="myInputPass" required>
+                                <input type="password" name="CL_password" class="form-control loginTb" placeholder="password" id="myInputPass" required>
                             </div>
                             <div class="pass-Show">
                                 <input type="checkbox" onclick="showPass()">
