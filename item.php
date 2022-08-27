@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['customer_id'])) {
     header("location:{$homename}/index.php");
 } else {
 
@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
         ?>
 
         <div class="header">
-            <h1>User PANEL - <?php echo $_SESSION['username'] . "," . $_SESSION["id"] . "," . $_SESSION["pwd"] . "," . $_SESSION["mobile"]; ?></h1>
+            <h1>User PANEL - <?php echo  $_SESSION["customer_id"]; ?></h1>
         </div>
 
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">

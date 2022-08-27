@@ -2,14 +2,23 @@
 include "config.php";
 include "header.php";
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['customer_id'])) {
     header("location:{$homename}/index.php");
 } else {
+    $sql = "SELECT * FROM `customer_login` WHERE l_id = {$_SESSION['customer_id']} ";
+
+    $result = mysqli_query($conn, $sql) or die("Query Failed select user name.");
+
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $customer_Name = $row['l_uname'];
+        }
+    }
 
     if (isset($_POST['comment'])) {
         $comment = mysqli_real_escape_string($conn, $_POST['f_desc']);
 
-        $sqladd = "INSERT INTO `feedback` (`f_cus_name`,`f_desc`) VALUES ('{$_SESSION['username']}','$comment')";
+        $sqladd = "INSERT INTO `feedback` (`f_cus_name`,`f_desc`) VALUES ('$customer_Name','$comment')";
 
         if (mysqli_query($conn, $sqladd)) {
 

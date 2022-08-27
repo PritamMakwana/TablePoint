@@ -1,6 +1,6 @@
 <?php
 include "config.php";
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['customer_id'])) {
     header("Location: {$homename}/item.php");
 } else {
 
@@ -95,10 +95,7 @@ if (isset($_SESSION['username'])) {
 
                         while ($row = mysqli_fetch_assoc($result)) {
 
-                            $_SESSION["id"] = $row['l_id'];
-                            $_SESSION["username"] = $row['l_uname'];
-                            $_SESSION["mobile"] = $row['l_mobile'];
-                            $_SESSION["pwd"] = $row['l_pwd'];
+                            $_SESSION["customer_id"] = $row['l_id'];
             ?>
                             <script>
                                 window.location.href = '<?php $homename ?>item.php';

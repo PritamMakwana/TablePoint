@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['customer_id'])) {
     header("location:{$homename}/index.php");
 } else {
 
