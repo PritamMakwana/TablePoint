@@ -18,6 +18,7 @@
             <a style="text-decoration: none;" href="menu.php">Menu</a>
             <a style="text-decoration: none;" href="operator.php">operator</a>
             <a style="text-decoration: none;" href="user.php">user</a>
+            <a style="text-decoration: none;" href="feedback.php">feedback</a>
         </div>
 
 

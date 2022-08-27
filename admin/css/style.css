@@ -192,14 +192,7 @@ input[type=number]::-webkit-outer-spin-button {
 } */
 .bill-input{
   background-color: #ffb30e;
-  width: 100% !important;
-  float: left !important;
 }
-.sideofitems{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #ffb30e;
-  width: 50% !important;
-  float: left !important;
+.bill-show{
+  background-color: aqua;
 }
