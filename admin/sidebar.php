@@ -23,7 +23,7 @@
 
 
         <div style="position: absolute; bottom: 10%; " class="header ">
-            <h1>ADMIN PANEL - <?php echo $_SESSION['a_username'] ?></h1>
+            <h1>ADMIN PANEL - <?php echo $_SESSION['admin_id'] ?></h1>
         </div>
 
         <form style="position: absolute;  bottom: 5%;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">

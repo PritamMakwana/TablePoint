@@ -1,6 +1,6 @@
 <?php
 include "config.php";
-if (!isset($_SESSION['a_username'])) {
+if (!isset($_SESSION['admin_id'])) {
     header("Location: {$homename}/index.php");
 } else {
 

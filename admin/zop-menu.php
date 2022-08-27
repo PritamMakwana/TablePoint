@@ -2,7 +2,7 @@
 include "config.php";
 
 
-if (!isset($_SESSION['o_username'])) {
+if (!isset($_SESSION['operator_id'])) {
     header("Location: {$homename}/index.php");
 } else {
 

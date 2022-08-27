@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 
-if (!isset($_SESSION['o_username'])) {
+if (!isset($_SESSION['operator_id'])) {
     header("Location: {$homename}/index.php");
 } else {
 
@@ -14,7 +14,7 @@ if (!isset($_SESSION['o_username'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Table</title>
+        <title>Bill</title>
     </head>
 
     <body>
