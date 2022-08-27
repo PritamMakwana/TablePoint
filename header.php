@@ -13,6 +13,7 @@
     <div>
         <a href="item.php">home</a>
         <a href="feedback.php">feedback</a>
+        <a href="category.php">category</a>
     </div>
 
 </body>

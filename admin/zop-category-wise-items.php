@@ -39,12 +39,8 @@ if (!isset($_SESSION['o_username'])) {
 
                 $result = mysqli_query($conn, $test) or die("Query Faild select." . mysqli_connect_error());
 
-              
-
                 if (mysqli_num_rows($result) > 0) {
-
                 ?>
-
                     <?php
 
                     while ($row = mysqli_fetch_assoc($result)) { ?>
