@@ -15,6 +15,8 @@
         <a href="feedback.php">feedback</a>
         <a href="category.php">category</a>
         <a href="profile.php">profile</a>
+        <a href="table-booking.php">Table Booking</a>
+        <a href="show-table-booking.php">Booking</a>
     </div>
 
 </body>

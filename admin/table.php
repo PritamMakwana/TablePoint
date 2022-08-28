@@ -34,8 +34,7 @@ if (!isset($_SESSION['admin_id'])) {
                 while ($row = mysqli_fetch_assoc($resTables)) {  ?>
                     <div class="container text-center">
                         <p><?php echo "table id = " . $row['t_id']; ?> </p>
-                        <p><?php echo "table no = " . $row['t_name_or_num']; ?> </p>
-                        <p><?php echo "table chair = " . $row['t_chair']; ?> </p>
+                        <p><?php echo "table no or name = " . $row['t_name_or_num']; ?> </p>
                         <div class="row justify-content-end">
                             <div class="col">
                                 <a href='update-table.php?id=<?php echo $row["t_id"]; ?>'>update</a>

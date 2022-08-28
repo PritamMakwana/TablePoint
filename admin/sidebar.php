@@ -19,6 +19,7 @@
             <a style="text-decoration: none;" href="operator.php">operator</a>
             <a style="text-decoration: none;" href="user.php">user</a>
             <a style="text-decoration: none;" href="feedback.php">feedback</a>
+            <a style="text-decoration: none;" href="admin-management.php">Management</a>
         </div>
 
 

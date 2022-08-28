@@ -8,7 +8,6 @@ if (!isset($_SESSION['admin_id'])) {
     if (isset($_POST['submit'])) {
         $tid = mysqli_real_escape_string($conn, $_POST['t_id']);
         $tnumber = mysqli_real_escape_string($conn, $_POST['table_number_name']);
-        $tchair = mysqli_real_escape_string($conn, $_POST['chair']);
 
         $mSelect  = "SELECT * FROM tables WHERE t_id = {$_POST['t_id']}";
         $mResult = mysqli_query($conn, $mSelect) or die("Query Faild select 1." . mysqli_connect_error(0));
@@ -17,11 +16,10 @@ if (!isset($_SESSION['admin_id'])) {
             while ($row = mysqli_fetch_assoc($mResult)) {
                 $old_tid = $row['t_id'];
                 $old_tnum = $row['t_name_or_num'];
-                $old_tchair = $row['t_chair'];
             }
         }
 
-        $sql = "UPDATE `tables` SET `t_name_or_num`= '$tnumber',`t_chair`=$tchair WHERE `t_id`= $tid ";
+        $sql = "UPDATE `tables` SET `t_name_or_num`= '$tnumber' WHERE `t_id`= $tid ";
 
         $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
@@ -65,10 +63,6 @@ if (!isset($_SESSION['admin_id'])) {
                     <div class="form-group">
                         <label>Table Name/Table Number :</label>
                         <input type="text" min="0" max="999999999999" name="table_number_name" class="form-control" placeholder="Table number Or name" value="<?php echo $row['t_name_or_num']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label>chair</label>
-                        <input type="number" min="0" max="999999999999" name="chair" class="form-control" placeholder="Number of chairs provided for the table " value="<?php echo $row['t_chair']; ?>" required>
                     </div>
                     <input type="button" name="back" class="btn btn-primary" value="Back" onclick="closePage()" />
                     <input type="submit" name="submit" class="btn btn-primary" value="update" required />

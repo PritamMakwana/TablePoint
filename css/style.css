@@ -63,11 +63,11 @@
   margin-bottom: 1% !important;
 }
 
-form {
+.form {
   text-align: center;
   width: 100% !important;
 }
-.form-control {
+.loginTb {
   width: 50% !important;
   margin-top: 3% !important;
   padding: 2% !important;
@@ -77,10 +77,10 @@ form {
   box-shadow: 8px 8px 0 0 #e5e5e55c, 0 0 8px 8px #f6f7f6;
   transition: 0.1s !important;
 }
-.form-control:focus {
+.loginTb:focus {
   box-shadow: 5px 5px 0 0 #f6f7f6, 0 0 5px 5px #e5e5e55c !important;
 }
-.form-control:hover {
+.loginTb:hover {
   box-shadow: 5px 5px 0 0 #f6f7f6, 0 0 5px 5px #e5e5e55c !important;
 }
 .pass-Show {

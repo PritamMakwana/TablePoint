@@ -6,7 +6,6 @@ if (!isset($_SESSION['admin_id'])) {
 
     if (isset($_POST['save'])) {
         $tnumber = mysqli_real_escape_string($conn, $_POST['table_number_name']);
-        $tchair = mysqli_real_escape_string($conn, $_POST['chair']);
 
         $sql = "SELECT * FROM  tables WHERE t_name_or_num = '$tnumber' ";
 
@@ -16,7 +15,7 @@ if (!isset($_SESSION['admin_id'])) {
             echo "<p style = 'color: red; text-align:center; margin :10px 0;' > Table number is already given <p>";
         } else {
 
-            $sqladd = "INSERT INTO `tables`( `t_name_or_num`, `t_chair`) VALUES ('$tnumber','$tchair')";
+            $sqladd = "INSERT INTO `tables`( `t_name_or_num`) VALUES ('$tnumber')";
 
             if (mysqli_query($conn, $sqladd)) {
 
@@ -33,10 +32,6 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="form-group">
                 <label>Table Name/Table Number:</label>
                 <input type="text" min="0" max="999999999999" name="table_number_name" class="form-control" placeholder="Table number" required>
-            </div>
-            <div class="form-group">
-                <label>chair</label>
-                <input type="number" min="0" max="999999999999" name="chair" class="form-control" placeholder="Number of chairs provided for the table " required>
             </div>
             <input type="submit" name="save" class="btn btn-primary" value="Save" required />
         </form>

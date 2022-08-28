@@ -1,7 +1,6 @@
 <?php
 include "config.php";
 
-
 if (!isset($_SESSION['operator_id'])) {
     header("Location: {$homename}/index.php");
 } else {
@@ -33,7 +32,6 @@ if (!isset($_SESSION['operator_id'])) {
                     <div class="container text-center">
                         <p><?php echo "table id = " . $row['t_id']; ?> </p>
                         <p><?php echo "table no or name = " . $row['t_name_or_num']; ?> </p>
-                        <p><?php echo "table chair = " . $row['t_chair']; ?> </p>
                         <hr>
                     </div>
                 <?php } ?>
