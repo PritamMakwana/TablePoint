@@ -36,7 +36,11 @@ if (!isset($_SESSION['admin_id'])) {
                             </div>
                             <div class="form-group">
                                 <label>Table in Person Allow max :</label>
-                                <input type="number" min="0" max="999999999999" name="table_person_max" class="form-control" placeholder="Number of chairs provided for the table " value="<?php echo $row['table_person_max']; ?>" required>
+                                <input type="number" min="0" max="999999999999" name="table_person_max" class="form-control" placeholder="Person Allow maxfor the table " value="<?php echo $row['table_person_max']; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Bill in Discount :</label>
+                                <input type="number" min="0" max="100" name="discount" class="form-control" placeholder="Discount" value="<?php echo $row['discount']; ?>" required>
                             </div>
                             <input type="submit" name="update_managment" class="btn btn-primary" value="update" required />
                 <?php }
@@ -47,14 +51,14 @@ if (!isset($_SESSION['admin_id'])) {
                 if (isset($_POST['update_managment'])) {
                     $a_manag_id = mysqli_real_escape_string($conn, $_POST['a_manag_id']);
                     $Table_person_max = mysqli_real_escape_string($conn, $_POST['table_person_max']);
+                    $Discount = mysqli_real_escape_string($conn, $_POST['discount']);
 
-
-                    $sql = "UPDATE `admin_manage` SET `table_person_max`='$Table_person_max' WHERE `a_manag_id`=$a_manag_id";
+                    $sql = "UPDATE `admin_manage` SET `table_person_max`='$Table_person_max',`discount`='$Discount' WHERE `a_manag_id`=$a_manag_id";
 
                     $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
                     if ($result) {
-                        header("Location:{$homename}/table.php");    
+                        header("Location:{$homename}/table.php");
                     } else {
                         echo "<script>alert('Update Managment Data in problem')</script>";
                     }
@@ -63,7 +67,6 @@ if (!isset($_SESSION['admin_id'])) {
                 ?>
             </div>
         </div>
-
     </body>
 
     </html>
