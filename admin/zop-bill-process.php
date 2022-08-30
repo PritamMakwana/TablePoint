@@ -8,9 +8,8 @@ include "config.php";
 </script>
 <?php
 if (!isset($_SESSION['operator_id'])) {
-    header("Location: {$homename}/index.php");
+    header("Location:{$homename}/index.php");
 } else {
-
 
     $customer_info_select = "SELECT * FROM `bill_customer_info` WHERE `cus_bill_unique`= '{$_SESSION["Bill_time"]}'";
 
@@ -77,20 +76,22 @@ if (!isset($_SESSION['operator_id'])) {
                             <div>
                                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                                     <input type="hidden" class="form-control w-50" id="pricestore" type="number" placeholder="id" name="pricestore">
-                                    <input type="submit" id="showpricebtn" onclick="showData()" value="select" class="btn btn-success ms-3" disabled />
+                                    <input type="submit" id="showpricebtn" onclick="showData()" value="Select Item" name="Select_Item" class="btn btn-success ms-3" disabled />
                                 </form>
                             </div>
                         </div>
                         <div class=" mb-3 ">
                             <?php
                             if (isset($_POST['pricestore'])) {
+                            ?>
+                                <?php
                                 $pricesql = "SELECT * FROM `items` WHERE `item_id`= {$_POST['pricestore']}";
 
                                 $resultpr = mysqli_query($conn, $pricesql) or die("Query Failed.");
 
                                 if (mysqli_num_rows($resultpr) > 0) {
                                     while ($row = mysqli_fetch_assoc($resultpr)) {
-                            ?>
+                                ?>
                                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-3 d-flex flex-row " method="POST">
                                             <div class="mb-3 d-flex flex-row m-2">
                                                 <label class="form-label m-2">item:</label>
@@ -106,7 +107,7 @@ if (!isset($_SESSION['operator_id'])) {
                                                 <input class="form-control w-50" id="qty" min="1" value="1" type="number" placeholder="Qty" name="qty">
                                             </div>
                                             <div class="mb-3 d-flex flex-row m-2">
-                                                <input type="submit" id="addItem" onclick="addAmount()" class="btn btn-success" name="addItem" />
+                                                <input type="submit" id="addItem" onclick="addAmount()" class="btn btn-success" value="Add" name="addItem" />
                                             </div>
                                         </form>
                             <?php
@@ -237,8 +238,8 @@ if (!isset($_SESSION['operator_id'])) {
                                     <input class="form-control m-3" type="text" placeholder="total" value="<?php echo $Total_Amount . " ₹"; ?>" readonly>
                                 </div>
                                 <div class="mb-3 d-flex flex-row">
-                                    <label class="form-label d-flex align-items-center">Discount:</label>
-                                    <input class="form-control m-3" type="text" placeholder="discount" value="<?php echo $Discount . " %"; ?>" readonly>
+                                    <label class="form-label d-flex align-items-center">Discount <?php echo $Discount . "%"; ?>:</label>
+                                    <input class="form-control m-3" type="text" placeholder="discount" value="<?php echo $Discount_value; ?>" readonly>
                                 </div>
                                 <div class="mb-3 d-flex flex-row">
                                     <label class="form-label d-flex align-items-center">Total With Discount:</label>
@@ -257,6 +258,7 @@ if (!isset($_SESSION['operator_id'])) {
             </div>
 
     <?php
+
     }
 }
     ?>
@@ -276,13 +278,6 @@ if (!isset($_SESSION['operator_id'])) {
             var amount = qty * price;
             document.getElementById('amount').value = amount;
         }
-
-        // $(document).ready(function() {
-        //     $("#qty").change(function() {
-        //         var amount =  $("#qty").value * $("#price").value ;
-        //         $("#amount").var("wqe");
-        //     });
-        // });
 
         function priceChange() {
             var item = document.getElementById('item_select').value;
@@ -309,11 +304,6 @@ if (!isset($_SESSION['operator_id'])) {
                 x.disabled = false;
             }
         }
-
-        // function deleteDisabled() {
-        //     var x = document.getElementById("btn_delete");
-        //     // x.
-        // }
     </script>
         </body>
 
