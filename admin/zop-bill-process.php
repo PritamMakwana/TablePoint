@@ -174,7 +174,7 @@ if (!isset($_SESSION['operator_id'])) {
                                     $Order_Item_Qty = mysqli_real_escape_string($conn, $_POST['qty']);
                                     $Order_Item_Amount = mysqli_real_escape_string($conn, $_POST['amount']);
 
-                                    $Order_Item_Insert = "INSERT INTO `bill_order_items`(`boi_item`, `boi_qty`, `boi_price`, `boi_items_amount`, `cus_bill_id`) VALUES ('$Order_Item_Name','$Order_Item_Qty','$Order_Item_Price','$Order_Item_Amount','$customer_bill_id')";
+                                    $Order_Item_Insert = "INSERT INTO `bill_order_items`(`boi_item`, `boi_qty`, `boi_price`, `boi_items_amount`, `cus_bill_id` ,`op_id`) VALUES ('$Order_Item_Name','$Order_Item_Qty','$Order_Item_Price','$Order_Item_Amount','$customer_bill_id','{$_SESSION['operator_id']}')";
 
                                     $Order_Item_Add = mysqli_query($conn, $Order_Item_Insert) or die("Query Failed Order insert record" . $sql);
 

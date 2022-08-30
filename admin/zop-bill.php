@@ -15,7 +15,7 @@ if (!isset($_SESSION['operator_id'])) {
             $AR_cus_bill_id = $row['cus_bill_id'];
 
             //bill_customer_info
-            $customer_info_select = "SELECT * FROM `bill_customer_info`";
+            $customer_info_select = "SELECT * FROM `bill_customer_info` WHERE `op_id` = {$_SESSION['operator_id']}";
 
             $result_customer_info_select = mysqli_query($conn, $customer_info_select) or die("Query Failed  customer_info_select");
 
@@ -36,7 +36,7 @@ if (!isset($_SESSION['operator_id'])) {
             }
 
             //bill_order_items
-            $order_items_select = "SELECT * FROM `bill_order_items`";
+            $order_items_select = "SELECT * FROM `bill_order_items` WHERE `op_id` = {$_SESSION['operator_id']}";
 
             $result_order_items_select = mysqli_query($conn, $order_items_select) or die("Query Failed  result_order_items_select");
 
@@ -57,9 +57,9 @@ if (!isset($_SESSION['operator_id'])) {
             }
         }
     } else {
-        $cus_info_delete = "DELETE FROM `bill_customer_info` ";
+        $cus_info_delete = "DELETE FROM `bill_customer_info` WHERE `op_id` = {$_SESSION['operator_id']}";
         mysqli_query($conn, $cus_info_delete);
-        $order_item_delete = "DELETE FROM `bill_order_items` ";
+        $order_item_delete = "DELETE FROM `bill_order_items`  WHERE `op_id` = {$_SESSION['operator_id']}";
         mysqli_query($conn, $order_item_delete);
     }
 
@@ -104,7 +104,7 @@ if (!isset($_SESSION['operator_id'])) {
                 $CustomerDate = date('Y-m-d');
                 $CustomerTime = date('H:i:s');
 
-                $sqladdCustomerName = "INSERT INTO `bill_customer_info` (`cus_name`,`cus_bill_unique`,`cus_date`, `cus_time`) VALUES ('$CustomerName','$Bill_time','$CustomerDate','$CustomerTime')";
+                $sqladdCustomerName = "INSERT INTO `bill_customer_info` (`cus_name`,`cus_bill_unique`,`cus_date`, `cus_time`, `op_id`) VALUES ('$CustomerName','$Bill_time','$CustomerDate','$CustomerTime','{$_SESSION['operator_id']}')";
 
                 if (mysqli_query($conn, $sqladdCustomerName)) {
                     header("Location: {$homename}/zop-bill-process.php");
