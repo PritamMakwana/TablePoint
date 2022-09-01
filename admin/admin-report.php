@@ -1,11 +1,16 @@
 <?php
 include "config.php";
+?>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 
-
+<?php
 if (!isset($_SESSION['admin_id'])) {
     header("Location: {$homename}/index.php");
 } else {
-
 ?>
 
     <!DOCTYPE html>
@@ -38,14 +43,11 @@ if (!isset($_SESSION['admin_id'])) {
 
                     <?php
                     if (isset($_POST['date_input'])) {
-
                         $Report_show_select = "SELECT * FROM `admin_report` WHERE a_r_date = '{$_POST['date']}'";
-
                         $Report_Show = mysqli_query($conn, $Report_show_select) or die("Query Failed Report Show.");
 
                         $column_no = 0;
                         $Total_Report = 0;
-                        
 
                         if (mysqli_num_rows($Report_Show) > 0) { ?>
                             <table class="table">
@@ -54,6 +56,7 @@ if (!isset($_SESSION['admin_id'])) {
                                         <th scope="col">No.</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Customer Name</th>
+                                        <th scope="col">Show Bill</th>
                                         <th scope="col">Sub-Total</th>
                                         <th scope="col">Discount(-)</th>
                                         <th scope="col">Final Total</th>
@@ -78,6 +81,7 @@ if (!isset($_SESSION['admin_id'])) {
                                             <th scope="row"><?php echo ++$column_no; ?></th>
                                             <td><?php echo $row['a_r_date']; ?></td>
                                             <td><?php echo $CustomerName; ?></td>
+                                            <td><a class="btn btn-info" href="admin-show-bill.php?id=<?php echo $row['cus_bill_id']; ?>">Show</a>
                                             <td><?php echo $row['a_r_total']; ?></td>
                                             <td><?php echo $row['a_r_discount'] . " %"; ?></td>
                                             <td><?php echo $row['a_r_final_total']; ?></td>
@@ -86,8 +90,8 @@ if (!isset($_SESSION['admin_id'])) {
                                     }
                                     ?>
                                     <tr>
-                                        <td colspan="5" class="table-success"><?php echo "Profit on this date"; ?></td>
-                                        <td class="table-success" ><?php echo $Total_Report; ?></td>
+                                        <td colspan="6" class="table-success"><?php echo "Profit on this date"; ?></td>
+                                        <td class="table-success"><?php echo $Total_Report; ?></td>
                                     </tr>
                             <?php
                         } else {
