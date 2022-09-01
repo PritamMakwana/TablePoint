@@ -23,7 +23,6 @@ if (!isset($_SESSION['operator_id'])) {
                 <?php include "zop-sidebar.php"; ?>
             </div>
             <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
-            <button id="print_req">Click to print</button>
                 <?php
                 $sTables = "SELECT * FROM tables ";
                 $resTables = mysqli_query($conn, $sTables) or die("Query Faild sTables." . mysqli_connect_error());
@@ -44,16 +43,6 @@ if (!isset($_SESSION['operator_id'])) {
     <?php
 }
     ?>
-    <script>
-        $(document).ready(function() {
-            $("#print_req").click(function() {
-                $("#print_req").css("display", "none");
-                window.print();
-            });
-            $("#print_req").css("display", "block");
-            return false;
-        });
-    </script>
     </body>
 
     </html>
