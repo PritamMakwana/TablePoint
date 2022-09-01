@@ -57,8 +57,8 @@ if (!isset($_SESSION['operator_id'])) {
                         <div class="mb-3 d-flex flex-row m-2">
                             <label class="form-label m-2">add items :</label>
                             <select id="item_select" onchange="priceChange(); priceclick()
-                            " name="category" class="form-control w-50">
-                                <option disabled>Select Category</option>
+                            " name="Select_item" class="form-control w-50">
+                                <option disabled hidden selected>Select Food Item</option>
                                 <?php
 
                                 $sql = "SELECT * FROM `items`";
@@ -213,7 +213,7 @@ if (!isset($_SESSION['operator_id'])) {
                             $Total_Amount = 0;
                         }
 
-                        $Discount_value = $Total_Amount * $Discount / 100;
+                        $Discount_value = round($Total_Amount * $Discount / 100);
                         $Total_with_Discount = $Total_Amount - $Discount_value;
                         $Total_with_Discount_new = round($Total_with_Discount);
 

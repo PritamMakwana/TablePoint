@@ -22,3 +22,4 @@ if (!isset($_SESSION['operator_id'])) {
         echo "<script>alert('Confirm Bill - This work cannot be done because there is a server side problem')</script>";
     }
 }
+?>
