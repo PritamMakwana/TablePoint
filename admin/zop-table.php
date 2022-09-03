@@ -48,7 +48,7 @@ if (!isset($_SESSION['operator_id'])) {
                 $RunnigTableShow = mysqli_query($conn, $RunnigTableselect) or die("Query Failed Runnig Table select.");
                 if (mysqli_num_rows($Tables_show_all) > 0) {
                 ?>
-                    <h1>Runnig Tables</h1>
+                    <h1>Tables</h1>
                     <table class="table">
                         <thead>
                             <tr>
@@ -60,72 +60,44 @@ if (!isset($_SESSION['operator_id'])) {
                         </thead>
                         <tbody>
                             <?php
-                            if (mysqli_num_rows($RunnigTableShow) == 0) {
-                                echo "</tbody>";
-                                echo "</table>";
-                                echo "<h3>There are currently no table running</h3>";
-                            } else {
-                                $column_no = 0;
-                                while ($rowRun = mysqli_fetch_assoc($RunnigTableShow)) { ?>
-                                    <tr>
-                                        <th scope="row"><?php echo ++$column_no; ?></th>
-                                        <td><?php echo $rowRun['t_name_or_num']; ?></td>
-                                        <td>
-                                            <p class="btn btn-info disabled">Runnig</p>
-                                        </td>
-                                        <td>
-                                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                                                <div>
-                                                    <input type="hidden" name="table_id" value="<?php echo $rowRun['t_id']; ?>" required>
-                                                </div>
-                                                <input type="submit" name="table_status_disactive" class="btn btn-danger" value="Disactive">
-                                            </form>
-                                        </td>
-                                    </tr>
+                            $column_no = 0;
+                            while ($rowRun = mysqli_fetch_assoc($RunnigTableShow)) { ?>
+                                <tr class="text-info">
+                                    <th scope="row"><?php echo ++$column_no; ?></th>
+                                    <td><?php echo $rowRun['t_name_or_num']; ?></td>
+                                    <td>
+                                        <p class="btn btn-info disabled">Runnig</p>
+                                    </td>
+                                    <td>
+                                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                                            <div>
+                                                <input type="hidden" name="table_id" value="<?php echo $rowRun['t_id']; ?>" required>
+                                            </div>
+                                            <input type="submit" name="table_status_disactive" class="btn btn-danger" value="Disactive">
+                                        </form>
+                                    </td>
+                                </tr>
                             <?php
-                                }
                             }
+                            $column_no_d = 0;
+                            while ($row = mysqli_fetch_assoc($Disactive_Tables)) {
                             ?>
-                        </tbody>
-                    </table>
-                    <h1>Tables Available</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Tables</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Change Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
+                                <tr class="text-success" >
+                                    <th scope="row"><?php echo ++$column_no_d; ?></th>
+                                    <td><?php echo $row['t_name_or_num']; ?></td>
+                                    <td>
+                                        <p class="btn btn-success disabled">Disactive</p>
+                                    </td>
+                                    <td>
+                                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                                            <div>
+                                                <input type="hidden" name="table_id" value="<?php echo $row['t_id']; ?>" required>
+                                            </div>
+                                            <input type="submit" name="table_status_active" class="btn btn-success" value="Active">
+                                        </form>
+                                    </td>
+                                </tr>
                             <?php
-                            if (mysqli_num_rows($Disactive_Tables) == 0) {
-                                echo "</tbody>";
-                                echo "</table>";
-                                echo "<h3>all table is running</h3>";
-                            } else {
-                                $column_no_d = 0;
-                                while ($row = mysqli_fetch_assoc($Disactive_Tables)) {
-                            ?>
-                                    <tr>
-                                        <th scope="row"><?php echo ++$column_no_d; ?></th>
-                                        <td><?php echo $row['t_name_or_num']; ?></td>
-                                        <td>
-                                            <p class="btn btn-success disabled">Disactive</p>
-                                        </td>
-                                        <td>
-                                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                                                <div>
-                                                    <input type="hidden" name="table_id" value="<?php echo $row['t_id']; ?>" required>
-                                                </div>
-                                                <input type="submit" name="table_status_active" class="btn btn-success" value="Active">
-                                            </form>
-                                        </td>
-                                    </tr>
-                            <?php
-                                }
                             }
                             ?>
                         </tbody>
