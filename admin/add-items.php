@@ -7,15 +7,7 @@ if (!isset($_SESSION['admin_id'])) {
 ?>
     <!-- Form -->
     <form action="save-items.php" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label>Food Item Title</label>
-            <input type="text" name="item_title" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea name="item_desc" class="form-control" rows="5" required></textarea>
-        </div>
-        <div class="form-group">
+    <div class="form-group">
             <label>Category</label>
             <select name="category" class="form-control">
                 <option disabled>Select Category</option>
@@ -35,8 +27,16 @@ if (!isset($_SESSION['admin_id'])) {
             </select>
         </div>
         <div class="form-group">
+            <label>Food Item Title</label>
+            <input type="text" name="item_title" class="form-control" required>
+        </div>
+        <div class="form-group">
             <label>Food Item Price</label>
             <input type="number" name="item_price" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="item_desc" class="form-control" rows="5" ></textarea>
         </div>
         <div class="form-group">
             <label>Food Item image</label>

@@ -22,14 +22,6 @@ if (!isset($_SESSION['admin_id'])) {
                     <input type="hidden" name="item_id" class="form-control" value="<?php echo  $row['item_id']; ?>" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label>Food Item Title</label>
-                    <input type="text" name="item_title" class="form-control" autocomplete="off" value="<?php echo  $row['item_title']; ?>" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="item_desc" class="form-control" rows="5" required> <?php echo  $row['item_desc']; ?></textarea>
-                </div>
-                <div class="form-group">
                     <label>Category</label>
                     <select name="category" class="form-control">
                         <option disabled>Select Category</option>
@@ -55,15 +47,23 @@ if (!isset($_SESSION['admin_id'])) {
                     <input type="hidden" name="old_category" value="<?php echo $row['food_category']; ?>">
                 </div>
                 <div class="form-group">
+                    <label>Food Item Title</label>
+                    <input type="text" name="item_title" class="form-control" autocomplete="off" value="<?php echo  $row['item_title']; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Food Item Price</label>
+                    <input type="number" name="item_price" value="<?php echo  $row['item_price']; ?>" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="item_desc" class="form-control" rows="5" > <?php echo  $row['item_desc']; ?></textarea>
+                </div>
+                <div class="form-group">
                     <label>Food Item image</label>
                     <input type="file" name="new-image" id="image">
                     <div id="preview"></div>
                     <img src="upload/<?php echo  $row['item_img']; ?>" height="150px">
                     <input type="hidden" name="old_image" value="<?php echo  $row['item_img']; ?>">
-                </div>
-                <div class="form-group">
-                    <label>Food Item Price</label>
-                    <input type="number" name="item_price" value="<?php echo  $row['item_price']; ?>" class="form-control" required>
                 </div>
                 <input type="button" name="back" class="btn btn-primary" value="Back" onclick="closePage()" />
                 <input type="submit" name="updateItem" class="btn btn-primary" value="Update Item" required />
