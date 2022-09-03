@@ -5,6 +5,18 @@ if (!isset($_SESSION['customer_id'])) {
     header("location:{$homename}/index.php");
 } else {
 
+    $Admin_manage_select = "SELECT * FROM `admin_manage`";
+
+    $Admin_manage_select_Show = mysqli_query($conn, $Admin_manage_select) or die("Query Failed Admin manage select");
+    while ($row = mysqli_fetch_assoc($Admin_manage_select_Show)) {
+        $Open_Time = $row['min_table_book_time'];
+        $Close_Time = $row['max_table_book_time'];
+        $PersonMax = $row['table_person_max'];
+        $Open_Time_Show  = date("g:i a", strtotime($Open_Time));
+        $Close_Time_Show  = date("g:i a", strtotime($Close_Time));
+    }
+
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -29,8 +41,11 @@ if (!isset($_SESSION['customer_id'])) {
                     <input type="date" class="form-control w-25" name="i_date" required>
                 </div>
                 <div class="mb-3 d-flex flex-row ">
+                    <label class="form-label m-3"><?php echo "Table bookings can be made between " . $Open_Time_Show . " to  " . $Close_Time_Show;  ?></label>
+                </div>
+                <div class="mb-3 d-flex flex-row ">
                     <label class="form-label m-3">time : </label>
-                    <input type="time" class="form-control w-25" name="i_time" required>
+                    <input type="time" min="<?php echo $Open_Time; ?>" max="<?php echo $Close_Time; ?>" class="form-control w-25" name="i_time" required>
                 </div>
                 <div class="mb-3 d-flex flex-row ">
                     <label class="form-label m-3">Table Name/Number : </label>
@@ -52,18 +67,8 @@ if (!isset($_SESSION['customer_id'])) {
                     <label class="form-label m-3">Persons : </label>
                     <select class="form-select w-25" name="i_persons" required>
                         <?php
-                        $selectPersonMax = "SELECT `table_person_max` FROM `admin_manage`";
-
-                        $resultPersonMax = mysqli_query($conn, $selectPersonMax) or die("Query Failed select table.");
-
-                        if (mysqli_num_rows($resultPersonMax) > 0) {
-                            while ($row = mysqli_fetch_assoc($resultPersonMax)) {
-                                $PersonMax = $row['table_person_max'];
-
-                                for ($i = 1; $i <= $PersonMax; $i++) {
-                                    echo "<option> $i Person </option>";
-                                }
-                            }
+                        for ($i = 1; $i <= $PersonMax; $i++) {
+                            echo "<option> $i Person </option>";
                         }
                         ?>
                     </select>
@@ -79,14 +84,12 @@ if (!isset($_SESSION['customer_id'])) {
         <?php
 
         if (isset($_POST['booking_input'])) {
+
             $book_date = mysqli_real_escape_string($conn, $_POST['i_date']);
             $book_time = mysqli_real_escape_string($conn, $_POST['i_time']);
             $book_table_name = mysqli_real_escape_string($conn, $_POST['i_table_name_or_num']);
             $book_person_num = mysqli_real_escape_string($conn, $_POST['i_persons']);
             $book_cus_name = mysqli_real_escape_string($conn, $_POST['i_customer_name']);
-            $book_l_moblie;
-            $book_l_uname;
-            $book_l_id;
 
             $sqlUser = "SELECT * FROM `customer_login` WHERE l_id = {$_SESSION['customer_id']} ";
             $resultUser = mysqli_query($conn, $sqlUser) or die("Query Failed select log in infromation.");
@@ -108,10 +111,6 @@ if (!isset($_SESSION['customer_id'])) {
                 echo "<script>alert('Your booking has not been processed due to a server error')</script>";
             }
         }
-
-
-
-
         ?>
 
     <?php } ?>
