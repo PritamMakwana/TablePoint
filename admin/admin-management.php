@@ -29,22 +29,17 @@ if (!isset($_SESSION['admin_id'])) {
                 $resManage = mysqli_query($conn, $sManage) or die("Query Faild Management." . $sManage . mysqli_connect_error());
 
                 if (mysqli_num_rows($resManage) > 0) {
+                ?>
+                    <h2>Restaurant Management</h2>
+                    <?php
                     while ($row = mysqli_fetch_assoc($resManage)) {  ?>
                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                             <div class="form-group">
                                 <input type="hidden" name="a_manag_id" class="form-control" value="<?php echo $row['a_manag_id']; ?>">
                             </div>
                             <div class="form-group">
-                                <label>Table booking Allow Max Time:</label>
-                                <input type="time" name="min_table_book_time" class="form-control" placeholder="Restaurant Open time" value="<?php echo $row['min_table_book_time']; ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Table booking Allow Max Time :</label>
-                                <input type="time" name="max_table_book_time" class="form-control" placeholder="Restaurant close time" value="<?php echo $row['max_table_book_time']; ?>" required>
-                            </div>
-                            <div class="form-group">
                                 <label>Table in Person Allow max :</label>
-                                <input type="number" min="0" max="999999999999" name="table_person_max" class="form-control" placeholder="Person Allow maxfor the table " value="<?php echo $row['table_person_max']; ?>" required>
+                                <input type="number" min="1" max="999999999999" name="table_person_max" class="form-control" placeholder="Person Allow max for the table " value="<?php echo $row['table_person_max']; ?>" required>
                             </div>
                             <div class="form-group">
                                 <label>Bill in Discount :</label>
@@ -67,15 +62,11 @@ if (!isset($_SESSION['admin_id'])) {
                                 <input type="email" pattern=".{0,1000}" required title="1000 characters maxmum input" data-bs-toggle="tooltip" data-bs-placement="top" name="restaurant_email" class="form-control" placeholder="admim123@gmail.com" value="<?php echo $row['restaurant_email']; ?>" required>
                             </div>
                             <input type="submit" name="update_managment" class="btn btn-primary" value="update" required />
-                        <?php }
+                        <?php
+                    }
                 }
-
-
-
                 if (isset($_POST['update_managment'])) {
                     $a_manag_id = mysqli_real_escape_string($conn, $_POST['a_manag_id']);
-                    $Table_Booking_Open_time = mysqli_real_escape_string($conn, $_POST['min_table_book_time']);
-                    $Table_Booking_Close_time = mysqli_real_escape_string($conn, $_POST['max_table_book_time']);
                     $Table_person_max = mysqli_real_escape_string($conn, $_POST['table_person_max']);
                     $Discount = mysqli_real_escape_string($conn, $_POST['discount']);
                     $Restaurant_Name = mysqli_real_escape_string($conn, $_POST['restaurant_name']);
@@ -83,14 +74,21 @@ if (!isset($_SESSION['admin_id'])) {
                     $Restaurant_Mobile = mysqli_real_escape_string($conn, $_POST['restaurant_mobile']);
                     $Restaurant_Email = mysqli_real_escape_string($conn, $_POST['restaurant_email']);
 
-                    $sql = "UPDATE `admin_manage` SET `table_person_max`='$Table_person_max',`min_table_book_time`='$Table_Booking_Open_time',`max_table_book_time`='$Table_Booking_Close_time',`discount`='$Discount', `restaurant_name`='$Restaurant_Name',`restaurant_address`=' $Restaurant_Address',`restaurant_mobile`='$Restaurant_Mobile',`restaurant_email`='$Restaurant_Email' WHERE `a_manag_id`=$a_manag_id";
+                    $sql = "UPDATE `admin_manage` SET 
+                    `table_person_max`='$Table_person_max',
+                    `discount`='$Discount', 
+                    `restaurant_name`='$Restaurant_Name',
+                    `restaurant_address`=' $Restaurant_Address',
+                    `restaurant_mobile`='$Restaurant_Mobile',
+                    `restaurant_email`='$Restaurant_Email' 
+                    WHERE `a_manag_id`=$a_manag_id";
 
                     $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
                     if ($result) {
                         ?>
                             <script>
-                                window.location.href = '<?php $homename ?>table.php';
+                                window.location.href = '<?php $homename ?>admin-management.php';
                             </script>
                 <?php
                     } else {

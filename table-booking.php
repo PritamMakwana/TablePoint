@@ -14,8 +14,9 @@ if (!isset($_SESSION['customer_id'])) {
         $PersonMax = $row['table_person_max'];
         $Open_Time_Show  = date("g:i a", strtotime($Open_Time));
         $Close_Time_Show  = date("g:i a", strtotime($Close_Time));
+        $max_day = $row['max_day_book'];
+        $After_Date = date("Y-m-d", strtotime("+" . $max_day . "day"));
     }
-
 
 ?>
     <!DOCTYPE html>
@@ -32,16 +33,35 @@ if (!isset($_SESSION['customer_id'])) {
         <?php
         include "header.php";
         ?>
-        <h2>Table Booking</h2>
 
+        <?php
+
+        $Restaurant_day_time_Manage = "SELECT * FROM `restaurant_time_manage`";
+        $Restaurant_day_time_Manage_Show = mysqli_query($conn, $Restaurant_day_time_Manage) or die("Query Faild Management." . $sManage . mysqli_connect_error());
+
+        if (mysqli_num_rows($Restaurant_day_time_Manage_Show) > 0) {
+        ?>
+            <h2>Opening Hours</h2>
+            <?php
+            while ($row = mysqli_fetch_assoc($Restaurant_day_time_Manage_Show)) {
+            ?>
+                <div class="d-flex flex-row m-2">
+                    <input type="hidden" name="res_time_id" class="form-control" value="<?php echo $row['res_time_id']; ?>">
+                    <label><?php echo $row['res_days']; ?>: <?php echo $row['res_time_info']; ?></label>
+                </div>
+        <?php
+            }
+        }
+        ?>
+        <h2>Table Booking</h2>
         <div class="container-fluid d-flex flex-column">
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div class="mb-3 d-flex flex-row ">
                     <label class="form-label m-3">Date : </label>
-                    <input type="date" class="form-control w-25" name="i_date" required>
+                    <input type="date" min="<?php echo date("Y-m-d"); ?>" max="<?php echo $After_Date; ?>" class="form-control w-25" name="i_date" required>
                 </div>
                 <div class="mb-3 d-flex flex-row ">
-                    <label class="form-label m-3"><?php echo "Table bookings can be made between " . $Open_Time_Show . " to  " . $Close_Time_Show;  ?></label>
+                    <label class="form-label m-3"><?php echo "Today table bookings can be made between " . $Open_Time_Show . " to  " . $Close_Time_Show;  ?></label>
                 </div>
                 <div class="mb-3 d-flex flex-row ">
                     <label class="form-label m-3">time : </label>
@@ -82,7 +102,6 @@ if (!isset($_SESSION['customer_id'])) {
         </div>
 
         <?php
-
         if (isset($_POST['booking_input'])) {
 
             $book_date = mysqli_real_escape_string($conn, $_POST['i_date']);
@@ -106,7 +125,12 @@ if (!isset($_SESSION['customer_id'])) {
             $Booking_Add = mysqli_query($conn, $Booking_Add_Insert) or die("Query Failed Booking." . $sql);
 
             if ($Booking_Add) {
-                header("Location: {$homename}/show-table-booking.php");
+
+        ?>
+                <script>
+                    window.location.href = '<?php $homename ?>show-table-booking.php';
+                </script>
+        <?php
             } else {
                 echo "<script>alert('Your booking has not been processed due to a server error')</script>";
             }

@@ -20,6 +20,7 @@
             <a style="text-decoration: none;" href="user.php">user</a>
             <a style="text-decoration: none;" href="feedback.php">feedback</a>
             <a style="text-decoration: none;" href="admin-management.php">Management</a>
+            <a style="text-decoration: none;" href="admin-time-manage.php">Time Manage</a>
             <a style="text-decoration: none;" href="admin-report.php">Report</a>
         </div>
 
