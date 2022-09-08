@@ -55,6 +55,7 @@ if (!isset($_SESSION['admin_id'])) {
         while ($row = mysqli_fetch_assoc($resultu)) {
 
 ?>
+            <?php include "sidebar.php"; ?>
             <div class="col-md-offset-3 col-md-6">
                 <!-- Form Start -->
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
@@ -81,10 +82,12 @@ if (!isset($_SESSION['admin_id'])) {
                 </form>
                 <!-- Form End-->
             </div>
-
-<?php
+    <?php
         }
-    }
+    } ?>
+    </div>
+    </div>
+<?php
 }
 ?>
 <script>

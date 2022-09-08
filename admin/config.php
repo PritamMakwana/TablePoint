@@ -5,7 +5,6 @@
 
     <link href="./library/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/style.css?<?php echo time(); ?>" />
-    <link rel="stylesheet" href="library sidebar/css/style.min.css">
 
     <link rel="icon" type="image/x-icon" href="./images/only logo.png">
 
@@ -14,12 +13,6 @@
 
 <body>
     <script src="./library/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="library sidebar/plugins/chart.min.js"></script>
-    <!-- Icons library -->
-    <script src="library sidebar/plugins/feather.min.js"></script>
-    <!-- Custom scripts -->
-    <script src="library sidebar/js/script.js"></script>
 
 </body>
 

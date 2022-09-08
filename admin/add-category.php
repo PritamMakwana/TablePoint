@@ -25,6 +25,7 @@ if (!isset($_SESSION['admin_id'])) {
     }
 
 ?>
+    <?php include "sidebar.php"; ?>
     <!-- Form Start -->
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
         <div class="form-group">
@@ -34,6 +35,8 @@ if (!isset($_SESSION['admin_id'])) {
         <input type="submit" name="save" class="btn btn-primary" value="Add Category" required />
     </form>
     <!-- /Form End -->
+    </div>
+    </div>
 <?php
 }
 

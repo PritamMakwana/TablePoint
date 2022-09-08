@@ -5,9 +5,11 @@ if (!isset($_SESSION['admin_id'])) {
 } else {
 
 ?>
+
+    <?php include "sidebar.php"; ?>
     <!-- Form -->
     <form action="save-items.php" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
+        <div class="form-group">
             <label>Category</label>
             <select name="category" class="form-control">
                 <option disabled>Select Category</option>
@@ -36,7 +38,7 @@ if (!isset($_SESSION['admin_id'])) {
         </div>
         <div class="form-group">
             <label>Description</label>
-            <textarea name="item_desc" class="form-control" rows="5" ></textarea>
+            <textarea name="item_desc" class="form-control" rows="5"></textarea>
         </div>
         <div class="form-group">
             <label>Food Item image</label>
@@ -50,7 +52,8 @@ if (!isset($_SESSION['admin_id'])) {
 <?php
 }
 ?>
-
+</div>
+</div>
 <script>
     function imagePreview(fileInput) {
         if (fileInput.files && fileInput.files[0]) {

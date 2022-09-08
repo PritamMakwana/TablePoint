@@ -16,6 +16,7 @@ if (!isset($_SESSION['admin_id'])) {
         while ($row = mysqli_fetch_assoc($result)) {
 
 ?>
+            <?php include "sidebar.php"; ?>
             <!-- Form -->
             <form action="save-update-items.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
@@ -56,7 +57,7 @@ if (!isset($_SESSION['admin_id'])) {
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea name="item_desc" class="form-control" rows="5" > <?php echo  $row['item_desc']; ?></textarea>
+                    <textarea name="item_desc" class="form-control" rows="5"> <?php echo  $row['item_desc']; ?></textarea>
                 </div>
                 <div class="form-group">
                     <label>Food Item image</label>
@@ -76,6 +77,8 @@ if (!isset($_SESSION['admin_id'])) {
         echo "Result Not Found.";
     }
     ?>
+    </div>
+    </div>
 <?php
 }
 ?>

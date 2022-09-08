@@ -18,30 +18,26 @@ if (!isset($_SESSION['admin_id'])) {
     </head>
 
     <body>
-        <div style="display: flex; flex-direction: row; width:100%; ">
-            <div style=" width: 10%; height: 100%; background-color: wheat;  position: absolute; border: 2px solid black;">
-                <?php include "sidebar.php"; ?>
+        <?php include "sidebar.php"; ?>
+
+        <?php
+        $sTables = "SELECT * FROM customer_login ";
+        $resTables = mysqli_query($conn, $sTables) or die("Query Faild customer login." . mysqli_connect_error());
+
+        while ($row = mysqli_fetch_assoc($resTables)) {  ?>
+            <div class="container text-center">
+                <p><?php echo "user id = " . $row['l_id']; ?> </p>
+                <p><?php echo "user uname = " . $row['l_uname']; ?> </p>
+                <p><?php echo "user mobile = " . $row['l_mobile']; ?> </p>
+                <p><?php echo "user pwd = " . $row['l_pwd']; ?> </p>
+                <div class="col">
+                    <a href='delete-user.php?id=<?php echo $row["l_id"]; ?>'>delete</a>
+                </div>
+                <hr />
             </div>
-            <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
+        <?php } ?>
 
-                <?php
-                $sTables = "SELECT * FROM customer_login ";
-                $resTables = mysqli_query($conn, $sTables) or die("Query Faild customer login." . mysqli_connect_error());
-
-                while ($row = mysqli_fetch_assoc($resTables)) {  ?>
-                    <div class="container text-center">
-                        <p><?php echo "user id = " . $row['l_id']; ?> </p>
-                        <p><?php echo "user uname = " . $row['l_uname']; ?> </p>
-                        <p><?php echo "user mobile = " . $row['l_mobile']; ?> </p>
-                        <p><?php echo "user pwd = " . $row['l_pwd']; ?> </p>
-                        <div class="col">
-                            <a href='delete-user.php?id=<?php echo $row["l_id"]; ?>'>delete</a>
-                        </div>
-                        <hr />
-                    </div>
-                <?php } ?>
-
-            </div>
+        </div>
         </div>
 
     <?php

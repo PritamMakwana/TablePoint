@@ -20,52 +20,48 @@ if (!isset($_SESSION['admin_id'])) {
 
     <body>
 
-        <div style="display: flex; flex-direction: row; width:100%; ">
-            <div style=" width: 10%; height: 100%; background-color: wheat;  position: absolute; border: 2px solid black;">
-                <?php include "sidebar.php"; ?>
-            </div>
-            <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
+        <?php include "sidebar.php"; ?>
 
-                <?php
+        <?php
 
-                $cate_id = $_GET['id'];
+        $cate_id = $_GET['id'];
 
-                ?>
-                <h1><?php echo $_GET['cate_name'] ?></h1>
-                <?php
+        ?>
+        <h1><?php echo $_GET['cate_name'] ?></h1>
+        <?php
 
-                $test = "SELECT items.item_id, items.item_title,items.item_price, items.item_desc, items.food_category, items.item_img,food_category.cate_name, food_category.cate_name,food_category.cate_id FROM items 
+        $test = "SELECT items.item_id, items.item_title,items.item_price, items.item_desc, items.food_category, items.item_img,food_category.cate_name, food_category.cate_name,food_category.cate_id FROM items 
                 LEFT JOIN food_category ON items.food_category = food_category.cate_id WHERE food_category.cate_id = $cate_id; ";
 
-             
 
-                $result = mysqli_query($conn, $test) or die("Query Faild select." . mysqli_connect_error());
 
-                if (mysqli_num_rows($result) > 0) {
+        $result = mysqli_query($conn, $test) or die("Query Faild select." . mysqli_connect_error());
 
-                ?>
+        if (mysqli_num_rows($result) > 0) {
 
-                    <?php
+        ?>
 
-                    while ($row = mysqli_fetch_assoc($result)) { ?>
-                        <div class="card" style="width: 18rem;">
-                            <img src="upload/<?php echo $row['item_img']; ?>" height="200px" class="card-img-top" alt="<?php echo $row['item_title']; ?>">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $row['item_title']; ?></h5>
-                                <p class="card-text"><?php echo "₹" . $row['item_price']; ?></p>
-                                <p class="card-text"><?php echo $row['item_desc']; ?></p>
-                                <a href="update-items.php?id=<?php echo $row['item_id']; ?>" class="btn btn-primary">update <?php echo $row['item_id']; ?></a>
-                                <a href="delete-items.php?id=<?php echo $row['item_id']; ?>&catid=<?php echo $row['cate_id']; ?>" class="btn btn-primary">delete <?php echo $row['cate_id']; ?> <?php echo $row['item_id']; ?></a>
-                            </div>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                <?php
-                }
-                ?>
+            <?php
 
-            </div>
+            while ($row = mysqli_fetch_assoc($result)) { ?>
+                <div class="card" style="width: 18rem;">
+                    <img src="upload/<?php echo $row['item_img']; ?>" height="200px" class="card-img-top" alt="<?php echo $row['item_title']; ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $row['item_title']; ?></h5>
+                        <p class="card-text"><?php echo "₹" . $row['item_price']; ?></p>
+                        <p class="card-text"><?php echo $row['item_desc']; ?></p>
+                        <a href="update-items.php?id=<?php echo $row['item_id']; ?>" class="btn btn-primary">update <?php echo $row['item_id']; ?></a>
+                        <a href="delete-items.php?id=<?php echo $row['item_id']; ?>&catid=<?php echo $row['cate_id']; ?>" class="btn btn-primary">delete <?php echo $row['cate_id']; ?> <?php echo $row['item_id']; ?></a>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        <?php
+        }
+        ?>
+
+        </div>
         </div>
     <?php
 }

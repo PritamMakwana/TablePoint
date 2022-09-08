@@ -56,6 +56,7 @@ if (!isset($_SESSION['admin_id'])) {
     </head>
 
     <body>
+        <?php include "sidebar.php"; ?>
         <!--bill Print -->
         <div class="card" id="printableArea">
             <div class="card-header bg-black"></div>
@@ -128,6 +129,9 @@ if (!isset($_SESSION['admin_id'])) {
         <div class="d-flex flex-row m-3  justify-content-around">
             <button class="btn btnSubmit m-3" id="print_back" onclick="backtoPage();">Back</button>
             <button class="btn btnSubmit m-3" id="print_req" onclick="printDiv('printableArea')">Print</button>
+        </div>
+
+        </div>
         </div>
     <?php
 }

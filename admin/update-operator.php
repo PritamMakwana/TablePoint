@@ -74,6 +74,8 @@ if (!isset($_SESSION['admin_id'])) {
         while ($row = mysqli_fetch_assoc($resultu)) {
 
 ?>
+            <?php include "sidebar.php"; ?>
+
             <div class="col-md-offset-3 col-md-6">
                 <!-- Form Start -->
 
@@ -114,9 +116,13 @@ if (!isset($_SESSION['admin_id'])) {
                 <!-- Form End-->
             </div>
 
-<?php
+    <?php
         }
-    }
+    } ?>
+    </div>
+    </div>
+
+<?php
 }
 ?>
 
