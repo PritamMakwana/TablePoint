@@ -45,7 +45,7 @@ if (!isset($_SESSION['customer_id'])) {
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                 <div class="form-group">
                     <label>comment :</label>
-                    <input type="text" name="f_desc" class="form-control" placeholder="comment" required>
+                    <input type="text" maxlength="100" title="maximun character 100" name="f_desc" class="form-control" placeholder="comment" required>
                 </div>
                 <input type="submit" name="comment" class="btn btn-primary" value="comment" required />
             </form>

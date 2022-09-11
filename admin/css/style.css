@@ -112,7 +112,6 @@
   display: flex !important;
 }
 
-
 .rightbg {
   background-color: var(--white) !important;
   padding-left: 0px !important;
@@ -142,6 +141,14 @@
 .logo {
   text-align: center;
   margin-top: 5%;
+}
+
+/* admin side table */
+
+.table-card {
+  background-color: white !important;
+  border-radius: 15px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media only screen and (max-width: 900px) {
@@ -190,9 +197,9 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 } */
-.bill-input{
+.bill-input {
   background-color: #ffb30e;
 }
-.bill-show{
+.bill-show {
   background-color: aqua;
 }

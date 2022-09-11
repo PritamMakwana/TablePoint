@@ -4,14 +4,29 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: {$homename}/index.php");
 } else {
 
+    //admin name
     $Admin_Name = "SELECT * FROM `admin_login` ";
-
     $resultAdmin_Name = mysqli_query($conn, $Admin_Name) or die("Query Failed.");
 
     if (mysqli_num_rows($resultAdmin_Name) > 0) {
         while ($row = mysqli_fetch_assoc($resultAdmin_Name)) {
             $AdminNameShow = $row['a_l_uname'];
         }
+    }
+    //Restaurant Name
+    $sManage = "SELECT * FROM `admin_manage`";
+    $resManage = mysqli_query($conn, $sManage) or die("Query Faild Management." . $sManage . mysqli_connect_error());
+    if (mysqli_num_rows($resManage) > 0) {
+        while ($row = mysqli_fetch_assoc($resManage)) {
+            $RestaurantName = $row['restaurant_name'];
+        }
+    }
+    //Restaurant Logo
+    $smedia = "SELECT * FROM `restaurant_media`";
+    $resmedia = mysqli_query($conn, $smedia) or die("Query Faild Media fav Management." . $smedia . mysqli_connect_error());
+
+    while ($row1 = mysqli_fetch_assoc($resmedia)) {
+        $Restaurant_Logo = $row1['m_logo'];
     }
 
 ?>
@@ -44,7 +59,7 @@ if (!isset($_SESSION['admin_id'])) {
 
     <body>
 
-        <div class="container-xxl position-relative bg-light d-flex p-0">
+        <div class="container-xxl position-relative bg-light d-flex pb-1 p-0">
             <!-- Spinner Start -->
             <div id="spinner" class="show bg-light position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
                 <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -55,8 +70,11 @@ if (!isset($_SESSION['admin_id'])) {
             <!-- Sidebar Start -->
             <div class="sidebar pe-4 pb-3">
                 <nav class="navbar bg-light navbar-light">
-                    <a href="table.php" class="navbar-brand mx-4 mb-3 ">
-                        <h3 class="text-primary ">Admin</h3>
+                    <a href="table.php" class="navbar-brand">
+
+                        <p style="margin-left: 50% !important ;"><img src="admin_upload/<?php echo  $Restaurant_Logo; ?>" alt="<?php echo $RestaurantName;  ?>" width="50" height="50"> </p>
+
+                        <p class="text-dark ms-5 text-break fs-6"><?php echo $RestaurantName; ?></p>
                     </a>
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -107,6 +125,10 @@ if (!isset($_SESSION['admin_id'])) {
                             <img class="dash-icons m-2" src="library/icons/operator.png" alt="" />
                             Operators
                         </a>
+                        <a href="admin-media.php" class="nav-item nav-link " title="Restaurant website in images management">
+                            <img class="dash-icons m-2" src="library/icons/images.png" alt="" />
+                            Media
+                        </a>
 
                     </div>
                 </nav>
@@ -130,8 +152,7 @@ if (!isset($_SESSION['admin_id'])) {
                                 <img class="rounded-circle dash-icons m-2" src="library/icons/setting.png" alt="" />
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
+                                <a href="admin-profile.php" class="dropdown-item">My Profile</a>
                                 <a href="admin-logout.php" class="dropdown-item">Log Out</a>
                             </div>
                         </div>

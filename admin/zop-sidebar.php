@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +33,7 @@
         <?php
 
         if (isset($_POST['logout'])) {
-            session_destroy();
+            unset($_SESSION['operator_id']);
             header("Location: {$homename}/index.php");
         }
         ?>

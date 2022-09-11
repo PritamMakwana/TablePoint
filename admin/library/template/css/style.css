@@ -11,6 +11,9 @@
 .bg-white{
     background-color: white !important;
 }
+.btn-white{
+    background-color: white !important;
+}
 .navbar-light{
     background-color: var(--light) !important;
 }

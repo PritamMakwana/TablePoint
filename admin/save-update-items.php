@@ -11,22 +11,20 @@ if (!isset($_SESSION['admin_id'])) {
 
         $error = array();
 
-        $delete_img= $_POST['old_image'];
-        $sql1= "SELECT * FROM items WHERE item_img = '$delete_img' ";
-        $result = mysqli_query($conn,$sql1)  or die("Query Faild : select ". "  ".$sql1 );
+        $delete_img = $_POST['old_image'];
+        $sql1 = "SELECT * FROM items WHERE item_img = '$delete_img' ";
+        $result = mysqli_query($conn, $sql1)  or die("Query Faild : select " . "  " . $sql1);
         $row = mysqli_fetch_assoc($result);
-
-        unlink("upload/".$row['item_img']); //using this function folder in file delete
 
         $file_name = $_FILES['new-image']['name'];
         $file_size = $_FILES['new-image']['size'];
         $file_tmp = $_FILES['new-image']['tmp_name'];
         $file_type = $_FILES['new-image']['type'];
         $file_ext = strtolower(end(explode('.', $file_name)));
-        $extensions = array("jpeg", "jpg", "png");
+        $extensions = array("jpeg", "jpg", "png", "gif", "svg");
 
         if (in_array($file_ext, $extensions) === false) {
-            $error[] = "This extention file not allowed , Please choose a JPG or PNG file.";
+            $error[] = "This extention file not allowed , Please choose a JPG or PNG or SVG or GIF file.";
         }
 
         if ($file_size > 20971520) {
@@ -37,9 +35,16 @@ if (!isset($_SESSION['admin_id'])) {
         $image_name = $new_name;
 
         if (empty($error) == true) {
+            unlink("upload/" . $row['item_img']); //using this function folder in file delete
             move_uploaded_file($file_tmp, $target);
         } else {
-            print_r($error);
+?>
+            <br>
+            <h2 class="text-danger"><?php echo print_r($error); ?></h2>
+            <br>
+            <a class="btn btn-warning text-white m-5 w-25" href="menu.php">Back</a>
+            </div>
+<?php
             die();
         }
     }

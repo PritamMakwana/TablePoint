@@ -8,6 +8,20 @@ if (isset($_SESSION['admin_id'])) {
     header("Location: {$homename}/zop-table.php");
 } else {
 
+    $sManage = "SELECT * FROM `admin_manage`";
+    $resManage = mysqli_query($conn, $sManage) or die("Query Faild Management." . $sManage . mysqli_connect_error());
+
+    while ($row = mysqli_fetch_assoc($resManage)) {
+        $Restaurant_Name = $row['restaurant_name'];
+    }
+
+    $smedia = "SELECT * FROM `restaurant_media`";
+    $resmedia = mysqli_query($conn, $smedia) or die("Query Faild Media Management." . $smedia . mysqli_connect_error());
+
+    while ($row1 = mysqli_fetch_assoc($resmedia)) {
+        $Restaurant_logo = $row1['m_logo'];
+    }
+
 ?>
     <!doctype html>
     <html lang="en">
@@ -59,8 +73,8 @@ if (isset($_SESSION['admin_id'])) {
                 </div>
                 <div class="col rightbg">
                     <div class="rightbox">
-                        <div class="txtwelcome">Welcome to <br> TablePoint</div>
-                        <div class="logo"><img src="./images/logo.png" alt="TablePoint"> </div>
+                        <div class="txtwelcome text-break">Welcome to <br><?php echo $Restaurant_Name;  ?></div>
+                        <div class="logo"><img src="admin_upload/<?php echo  $Restaurant_logo; ?>" alt="<?php echo $Restaurant_Name;  ?>" width="200" height="200"> </div>
                     </div>
                 </div>
             </div>

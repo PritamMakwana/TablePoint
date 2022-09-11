@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin_id'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Table</title>
+        <title>Admin | Feedback</title>
     </head>
 
     <body>
@@ -23,25 +23,31 @@ if (!isset($_SESSION['admin_id'])) {
         <?php
         $sfb = "SELECT * FROM feedback ";
         $resFb = mysqli_query($conn, $sfb) or die("Query Faild sfeedback." . mysqli_connect_error());
+        ?>
 
-        while ($row = mysqli_fetch_assoc($resFb)) {  ?>
-            <div class="container text-center">
-                <p><?php echo "feedback  id = " . $row['f_id']; ?> </p>
-                <p><?php echo "feedback  cus_name = " . $row['f_cus_name']; ?> </p>
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+
                 <?php
-                $originalDate =  $row['f_timedate'];
-                $newDate = date("d-m-Y", strtotime($originalDate));
+                while ($row = mysqli_fetch_assoc($resFb)) {
+                    $originalDate =  $row['f_timedate'];
+                    $newDate = date("d-m-Y", strtotime($originalDate));
                 ?>
-                <p><?php echo "feedback  timedate = " . $newDate; ?> </p>
-                <p><?php echo "feedback  f_desc = " . $row['f_desc']; ?> </p>
+                    <div class="col-sm-12 col-md-6 col-xl-4 ">
+                        <div class="bg-light rounded h-100 p-4 table-card">
+                            <div class="text-start text-black-50 fs-6">
+                                <?php echo  $row['f_cus_name'] . "<br>"; ?>
+                                <?php echo  $newDate; ?>
+                            </div>
+                            <p class="text-break m-1 text-dark"><?php echo  $row['f_desc']; ?> </p>
+                            <a class="btn btn-white rounded  m-1 text-warning" href='delete-feedback.php?id=<?php echo $row["f_id"]; ?>'>delete</a>
+                        </div>
+                    </div>
+                <?php } ?>
 
-                <div class="col">
-                    <a href='delete-feedback.php?id=<?php echo $row["f_id"]; ?>'>delete</a>
-                </div>
             </div>
-            <hr />
+        </div>
 
-        <?php } ?>
 
         </div>
         </div>
