@@ -20,31 +20,27 @@ if (!isset($_SESSION['operator_id'])) {
 
     <body>
 
-        <div style="display: flex; flex-direction: row; width:100%; ">
-            <div style=" width: 10%; height: 100%; background-color: wheat;  position: absolute; border: 2px solid black;">
-                <?php include "zop-sidebar.php"; ?>
-            </div>
-            <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
-                <?php
-                $food_category = "SELECT * FROM `food_category`";
-                $resCategory = mysqli_query($conn, $food_category) or die("Query Faild category." . $food_category . mysqli_connect_error());
+        <?php include "zop-sidebar.php"; ?>
+        <?php
+        $food_category = "SELECT * FROM `food_category`";
+        $resCategory = mysqli_query($conn, $food_category) or die("Query Faild category." . $food_category . mysqli_connect_error());
 
-                while ($row = mysqli_fetch_assoc($resCategory)) {  ?>
-                    <div class="container text-center">
-                        <p><?php echo "category id = " . $row['cate_id']; ?> </p>
-                        <p><?php echo "category name = " . $row['cate_name']; ?> </p>
-                        <p><?php echo "category items = " . $row['items']; ?> </p>
-                        <div class="row justify-content-end">
-                            <div class="col">
-                                <a href='zop-category-wise-items.php?id=<?php echo $row["cate_id"]; ?>&cate_name=<?php echo $row["cate_name"]; ?>'>show food items</a>
-                            </div>
-                        </div>
-                        <hr>
+        while ($row = mysqli_fetch_assoc($resCategory)) {  ?>
+            <div class="container text-center">
+                <p><?php echo "category id = " . $row['cate_id']; ?> </p>
+                <p><?php echo "category name = " . $row['cate_name']; ?> </p>
+                <p><?php echo "category items = " . $row['items']; ?> </p>
+                <div class="row justify-content-end">
+                    <div class="col">
+                        <a href='zop-category-wise-items.php?id=<?php echo $row["cate_id"]; ?>&cate_name=<?php echo $row["cate_name"]; ?>'>show food items</a>
                     </div>
-
-                <?php } ?>
-
+                </div>
+                <hr>
             </div>
+
+        <?php } ?>
+
+        </div>
         </div>
 
     <?php

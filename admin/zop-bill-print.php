@@ -64,8 +64,10 @@ if (!isset($_SESSION['operator_id'])) {
         <title>Bill Print</title>
     </head>
 
-    <body>
+    <div>
         <!--bill Print -->
+        <?php include "zop-sidebar.php"; ?>
+
         <div class="card" id="printableArea">
             <div class="card-header bg-black"></div>
             <div class="card-body">
@@ -144,30 +146,35 @@ if (!isset($_SESSION['operator_id'])) {
             <button class="btn btnSubmit m-3" id="print_back" onclick="backtoPage();" disabled>Back</button>
             <button class="btn btnSubmit m-3" id="print_req" onclick="printDiv('printableArea')">Print</button>
         </div>
-    <?php
+
+    </div>
+    </div>
+
+
+<?php
 }
 
-    ?>
-    <script>
-        function printDiv(divName) {
-            var printContents = document.getElementById(divName).innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
+?>
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
 
-            var x = document.getElementById("print_back");
-            if (x.disabled == true) {
-                x.disabled = false;
-            }
+        var x = document.getElementById("print_back");
+        if (x.disabled == true) {
+            x.disabled = false;
         }
+    }
 
-        function backtoPage() {
-            window.location.href = '<?php $homename ?>zop-bill.php';
-        }
-    </script>
+    function backtoPage() {
+        window.location.href = '<?php $homename ?>zop-bill.php';
+    }
+</script>
 
 
-    </body>
+</body>
 
     </html>

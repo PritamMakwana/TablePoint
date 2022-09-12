@@ -46,11 +46,7 @@ if (!isset($_SESSION['operator_id'])) {
         </head>
 
         <body>
-            <div style="display: flex; flex-direction: row; width:100%; ">
-                <div style=" width: 10%; height: 100%; background-color: wheat;  position: absolute; border: 2px solid black;">
                     <?php include "zop-sidebar.php"; ?>
-                </div>
-                <div style=" width: 90%;  height: 100%; position: absolute; margin-left: 10%;  ">
                     <!-- <button id="print_req">Click to print</button> -->
                     <div class="container-fluid d-flex flex-column bill-input">
 

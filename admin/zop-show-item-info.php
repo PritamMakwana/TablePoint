@@ -22,12 +22,15 @@ if (!isset($_SESSION['operator_id'])) {
 
         <?php include "zop-sidebar.php"; ?>
         <div class="col-md-2">
-            <a class="add-new" href="zop-category.php">Categorys</a>
+            <a class="add-new" href="zop-menu.php">back</a>
         </div>
         <?php
+        $item_id = $_GET['id'];
 
-        $test = "SELECT items.item_id, items.item_title,items.item_price, items.item_desc, items.food_category, items.item_img,food_category.cate_name, food_category.cate_name,food_category.cate_id FROM items 
-                LEFT JOIN food_category ON items.food_category = food_category.cate_id";
+
+        $test = "SELECT items.item_id, items.item_title, items.item_price, items.item_desc, items.food_category, items.item_img,food_category.cate_name, food_category.cate_name,food_category.cate_id FROM items 
+LEFT JOIN food_category ON items.food_category = food_category.cate_id
+WHERE items.item_id = {$item_id}";
 
         $result = mysqli_query($conn, $test) or die("Query Faild select." . mysqli_connect_error());
 
@@ -41,17 +44,14 @@ if (!isset($_SESSION['operator_id'])) {
                 <div class="card" style="width: 18rem;">
                     <img src="upload/<?php echo $row['item_img']; ?>" height="200px" class="card-img-top" alt="<?php echo $row['item_title']; ?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo wordlimit($row['item_title'], 6); ?></h5>
+                        <h5 class="card-title"><?php echo $row['item_title']; ?></h5>
                         <div class="d-flex justify-content-between mt-3">
                             <p class="card-text">
                                 <?php echo $row['cate_name']; ?>
                             </p>
                             <p class="card-text"><?php echo "₹" . $row['item_price']; ?></p>
                         </div>
-                        <p class="card-text"><?php echo wordlimit($row['item_desc'], 10); ?></p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <a href="zop-show-item-info.php?id=<?php echo $row['item_id']; ?>" class="btn btn-white rounded  m-1 text-warning">show</a>
-                        </div>
+                        <p class="card-text"><?php echo $row['item_desc']; ?></p>
                     </div>
                 <?php
             }
@@ -65,24 +65,6 @@ if (!isset($_SESSION['operator_id'])) {
             <?php
         }
 
-
-        function wordlimit($string, $limit)
-        {
-
-            $overflow = true;
-
-            $array = explode(" ", $string);
-
-            $output = '';
-
-            for ($i = 0; $i < $limit; $i++) {
-
-                if (isset($array[$i])) $output .= $array[$i] . " ";
-                else $overflow = false;
-            }
-
-            return trim($output) . ($overflow ? "..." : '');
-        }
             ?>
     </body>
 
