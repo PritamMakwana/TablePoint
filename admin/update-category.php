@@ -40,7 +40,7 @@ if (!isset($_SESSION['admin_id'])) {
 
         $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
-        $category_name =  $_POST['f_cate'];
+        $category_name =  $food_cate_name;
         $cate_name_select = "SELECT * FROM  food_category WHERE cate_name = '$category_name'";
         $Number_result = mysqli_query($conn, $cate_name_select) or die("Query Failed select category name.");
 

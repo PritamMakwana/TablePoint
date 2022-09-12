@@ -37,7 +37,7 @@ if (!isset($_SESSION['admin_id'])) {
 
             $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
-            $TableNumber =  $_POST['table_number_name'];
+            $TableNumber =  $tnumber;
             $table_num = "SELECT * FROM  tables WHERE t_name_or_num = '$TableNumber'";
             $Number_result = mysqli_query($conn, $table_num) or die("Query Failed select table number.");
 

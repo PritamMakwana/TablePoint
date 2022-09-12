@@ -53,7 +53,7 @@ if (!isset($_SESSION['admin_id'])) {
     if (mysqli_multi_query($conn, $sql)) {
         header("Location: {$homename}/menu.php");
     } else {
-        echo "<div class = 'alert alert-danger' >Query Faild.</div> ";
+        echo "<div class = 'alert alert-danger' >Query Faild</div> ";
     }
 }
 ?>

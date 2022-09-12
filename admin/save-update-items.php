@@ -49,16 +49,24 @@ if (!isset($_SESSION['admin_id'])) {
         }
     }
 
-    $sql = "UPDATE items SET item_title ='{$_POST["item_title"]}',item_price = '{$_POST["item_price"]}',item_desc='{$_POST["item_desc"]}' , food_category = {$_POST["category"]} , item_img='{$image_name}' WHERE item_id ={$_POST["item_id"]} ; ";
+    $title = mysqli_real_escape_string($conn, $_POST['item_title']);
+    $desc = mysqli_real_escape_string($conn, $_POST['item_desc']);
+    $image_name_new = mysqli_real_escape_string($conn, $image_name);
+
+    $sql = "UPDATE items SET item_title ='{$title}',item_price = '{$_POST["item_price"]}',item_desc='{$desc}' , food_category = {$_POST["category"]} , item_img='{$image_name_new}' WHERE item_id ={$_POST["item_id"]} ; ";
 
     if ($_POST['old_category'] != $_POST["category"]) {
         $sql .= "UPDATE food_category SET`items`=`items` - 1  WHERE cate_id = {$_POST['old_category']};";
         $sql .= "UPDATE food_category SET `items`=`items` + 1  WHERE cate_id = {$_POST['category']};";
     }
 
-    if (mysqli_multi_query($conn, $sql)) {
+    base64_encode($sql);
+
+    $Query_update = mysqli_multi_query($conn, $sql);
+
+    if ($Query_update) {
         header("Location: {$homename}/menu.php");
     } else {
-        echo "<div class = 'alert alert-danger' >Query Faild.</div> ";
+        echo "<div class = 'alert alert-danger' >Query Faild." . $sql . "</div> ";
     }
 }

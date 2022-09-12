@@ -40,13 +40,13 @@ if (!isset($_SESSION['admin_id'])) {
             $sql = "UPDATE `operators` SET `op_uname`='$opuname',`op_mobile`='$opmob',`op_pwd`='$oppwd' WHERE `op_id`='$opid'";
             $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
-            $mob =  $_POST['op_mobile'];
-            $uname = $_POST['op_uname'];
+            $mob =   $opmob;
+            $uname = $opuname;
 
             $mob_sql = "SELECT * FROM  operators WHERE op_mobile = '$mob'";
             $uname_sql = "SELECT * FROM  operators WHERE op_uname = '$uname'";
             $mob_result = mysqli_query($conn, $mob_sql) or die("Query Failed select mobile.");
-            $uname_result = mysqli_query($conn, $uname_sql) or die("Query Failed select uname.");
+            $uname_result = mysqli_query($conn, $uname_sql) or die("Query Failed select uname." .$uname_sql);
 
             if ($result) {
                 if (mysqli_num_rows($mob_result) >= 2 || mysqli_num_rows($uname_result) >= 2) {

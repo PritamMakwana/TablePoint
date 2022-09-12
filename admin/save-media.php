@@ -102,10 +102,13 @@ if (!isset($_SESSION['admin_id'])) {
 
     //fav end 
 
+    $image_logo_new = mysqli_real_escape_string($conn, $image_logo);
+    $image_fav_new = mysqli_real_escape_string($conn, $image_fav);
+
     $sqlupdate = "UPDATE `restaurant_media`
      SET 
-    `m_logo`='{$image_logo}',
-    `m_fav`='{$image_fav}'
+    `m_logo`='{$image_logo_new}',
+    `m_fav`='{$image_fav_new}'
      WHERE `m_id`='{$_POST["res_id"]}'";
 
     if (mysqli_query($conn, $sqlupdate)) {
