@@ -20,6 +20,19 @@ if (!isset($_SESSION['admin_id'])) {
 
         if (isset($_POST['submit'])) {
 
+            $test = "SELECT * FROM `admin_login` ";
+
+            $resultu = mysqli_query($conn, $test) or die("Query Faild selete." . mysqli_connect_error(0));
+
+            if (mysqli_num_rows($resultu) > 0) {
+                while ($row = mysqli_fetch_assoc($resultu)) {
+                    $id_admin = $row['a_l_id'];
+                    $uname_admin = $row['a_l_uname'];
+                    $mobile_admin = $row['a_l_mobile'];
+                    $pwd_admin = $row['a_l_pwd'];
+                }
+            }
+
             $Admin_id = mysqli_real_escape_string($conn, $_POST['admin_id']);
             $Admin_mob = mysqli_real_escape_string($conn, $_POST['admin_mobile']);
             $Admin_uname = mysqli_real_escape_string($conn, $_POST['admin_uname']);
@@ -28,8 +41,35 @@ if (!isset($_SESSION['admin_id'])) {
             $sql = "UPDATE `admin_login` SET `a_l_uname`='$Admin_uname',`a_l_mobile`='$Admin_mob',`a_l_pwd`='$Admin_pwd' WHERE `a_l_id`='$Admin_id'";
             $result = mysqli_query($conn, $sql) or die("Query Failed update." . $sql);
 
+            //opator
+            $mob_sql = "SELECT * FROM  operators WHERE op_mobile = '$Admin_mob'";
+            $uname_sql = "SELECT * FROM  operators WHERE op_uname = '$Admin_uname'";
+            $mob_result = mysqli_query($conn, $mob_sql) or die("Query Failed select mobile.");
+            $uname_result = mysqli_query($conn, $uname_sql) or die("Query Failed select uname." . $uname_sql);
+
             if ($result) {
-                header("Location:{$homename}/table.php");
+                if (mysqli_num_rows($mob_result) >= 1 || mysqli_num_rows($uname_result) >= 1) {
+                    if (mysqli_num_rows($mob_result) >= 1) {
+                        if (mysqli_fetch_assoc($mob_result)) {
+                            $sqlmob = "UPDATE `admin_login` SET `a_l_mobile`='$mobile_admin' WHERE `a_l_id`='$id_admin'";
+                            $resultmob =  mysqli_query($conn, $sqlmob) or die("Query Failed update.");
+                            if ($resultmob) {
+                                header("Location:{$homename}/admin-profile.php?error=mobile number is already given operator");
+                            }
+                        }
+                    }
+                    if (mysqli_num_rows($uname_result) >= 1) {
+                        if (mysqli_fetch_assoc($uname_result)) {
+                            $sqluname = "UPDATE `admin_login` SET `a_l_uname`='$uname_admin' WHERE `a_l_id`='$id_admin'";
+                            $resultuname =  mysqli_query($conn, $sqluname) or die("Query Failed update.");
+                            if ($resultuname) {
+                                header("Location:{$homename}/admin-profile.php?error=username is already given operator");
+                            }
+                        }
+                    }
+                } else {
+                    header("Location:{$homename}/table.php");
+                }
             } else {
                 echo "<script>alert('profile has not been update because there is an error from the server')</script>";
             }
@@ -82,6 +122,16 @@ if (!isset($_SESSION['admin_id'])) {
                                         <input type="button" name="back" class="btn btn-white rounded text-warning" value="Back" onclick="closePage()" />
                                         <input type="submit" name="submit" class="btn btn-white rounded text-warning" value="Update" required />
                                     </div>
+                                    <?php if (isset($_GET['error'])) {
+                                    ?>
+                                        <div class="login-err mt-2 col-md-12 d-flex justify-content-center">
+                                            <div class="alert alert-danger alert-dismissible fade show alert-mod" role="alert">
+                                                <?php echo $_GET['error']; ?>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="erorrClose()"></button>
+                                            </div>
+                                        </div>
+                                    <?php }
+                                    ?>
                                 </form>
                                 <!-- Form End-->
                             </div>
@@ -111,6 +161,10 @@ if (!isset($_SESSION['admin_id'])) {
 
         function closePage() {
             window.location.href = '<?php $homename ?>table.php';
+        }
+
+        function erorrClose() {
+            window.location.href = '<?php $homename ?>admin-profile.php';
         }
     </script>
     </body>

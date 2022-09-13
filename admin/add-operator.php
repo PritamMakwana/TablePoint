@@ -11,8 +11,14 @@ if (!isset($_SESSION['admin_id'])) {
 
         $mob_sql = "SELECT * FROM  operators WHERE op_mobile = '$op_mob' ";
         $uname_sql = "SELECT * FROM  operators WHERE op_uname = '$op_uname' ";
+
         $mob_result = mysqli_query($conn, $mob_sql) or die("Query Failed select mobile.");
         $uname_result = mysqli_query($conn, $uname_sql) or die("Query Failed select uname.");
+
+        $mob_sql_admin = "SELECT * FROM  admin_login WHERE a_l_mobile = '$op_mob' ";
+        $uname_sql_admin = "SELECT * FROM  admin_login WHERE a_l_uname = '$op_uname' ";
+        $mob_result_admin = mysqli_query($conn, $mob_sql_admin) or die("Query Failed select mobile admin.");
+        $uname_result_admin = mysqli_query($conn, $uname_sql_admin) or die("Query Failed select uname admin.");
 
         if (mysqli_num_rows($mob_result) > 0) {
             if (mysqli_fetch_assoc($mob_result)) {
@@ -21,6 +27,14 @@ if (!isset($_SESSION['admin_id'])) {
         } else if (mysqli_num_rows($uname_result) > 0) {
             if (mysqli_fetch_assoc($uname_result)) {
                 header("Location:{$homename}/add-operator.php?error=username  is already");
+            }
+        } else if (mysqli_num_rows($uname_result_admin) > 0) {
+            if (mysqli_fetch_assoc($uname_result_admin)) {
+                header("Location:{$homename}/add-operator.php?error=username  is already given admin");
+            }
+        } else if (mysqli_num_rows($mob_result_admin) > 0) {
+            if (mysqli_fetch_assoc($mob_result_admin)) {
+                header("Location:{$homename}/add-operator.php?error=mobile number is already given admin");
             }
         } else {
 
@@ -46,7 +60,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                         <div class="form-group m-1">
                             <label>Operator Mobile no.</label>
-                            <input type="tel"  pattern="[0-9]{10}" data-bs-toggle="tooltip" data-bs-placement="top" title="mobile number 10 digits required" name="op_mobile" class="form-control" placeholder="mobile number" required>
+                            <input type="tel" pattern="[0-9]{10}" data-bs-toggle="tooltip" data-bs-placement="top" title="mobile number 10 digits required" name="op_mobile" class="form-control" placeholder="mobile number" required>
                         </div>
                         <div class="form-group m-1">
                             <label>Operator User name</label>

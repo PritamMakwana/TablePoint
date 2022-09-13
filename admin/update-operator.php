@@ -46,7 +46,12 @@ if (!isset($_SESSION['admin_id'])) {
             $mob_sql = "SELECT * FROM  operators WHERE op_mobile = '$mob'";
             $uname_sql = "SELECT * FROM  operators WHERE op_uname = '$uname'";
             $mob_result = mysqli_query($conn, $mob_sql) or die("Query Failed select mobile.");
-            $uname_result = mysqli_query($conn, $uname_sql) or die("Query Failed select uname." .$uname_sql);
+            $uname_result = mysqli_query($conn, $uname_sql) or die("Query Failed select uname." . $uname_sql);
+
+            $mob_sql_admin = "SELECT * FROM  admin_login WHERE a_l_mobile = '$mob' ";
+            $uname_sql_admin = "SELECT * FROM  admin_login WHERE a_l_uname = '$uname' ";
+            $mob_result_admin = mysqli_query($conn, $mob_sql_admin) or die("Query Failed select mobile admin.");
+            $uname_result_admin = mysqli_query($conn, $uname_sql_admin) or die("Query Failed select uname admin.");
 
             if ($result) {
                 if (mysqli_num_rows($mob_result) >= 2 || mysqli_num_rows($uname_result) >= 2) {
@@ -65,6 +70,25 @@ if (!isset($_SESSION['admin_id'])) {
                             $resultuname =  mysqli_query($conn, $sqluname) or die("Query Failed update.");
                             if ($resultuname) {
                                 header("Location:{$homename}/update-operator.php?id={$_POST['op_id']}&error=username is already");
+                            }
+                        }
+                    }
+                } else  if (mysqli_num_rows($mob_result_admin) >= 1 || mysqli_num_rows($uname_result_admin) >= 1) {
+                    if (mysqli_num_rows($mob_result_admin) >= 1) {
+                        if (mysqli_fetch_assoc($mob_result_admin)) {
+                            $sqlmob = "UPDATE `operators` SET `op_mobile`='$old_opmob' WHERE `op_id`='$old_opid'";
+                            $resultmob =  mysqli_query($conn, $sqlmob) or die("Query Failed update.");
+                            if ($resultmob) {
+                                header("Location:{$homename}/update-operator.php?id={$_POST['op_id']}&error=mobile number is already given admin");
+                            }
+                        }
+                    }
+                    if (mysqli_num_rows($uname_result_admin) >= 1) {
+                        if (mysqli_fetch_assoc($uname_result_admin)) {
+                            $sqluname = "UPDATE `operators` SET `op_uname`='$old_opuname' WHERE `op_id`='$old_opid'";
+                            $resultuname =  mysqli_query($conn, $sqluname) or die("Query Failed update.");
+                            if ($resultuname) {
+                                header("Location:{$homename}/update-operator.php?id={$_POST['op_id']}&error=username is already given admin");
                             }
                         }
                     }
