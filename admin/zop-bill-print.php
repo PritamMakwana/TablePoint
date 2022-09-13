@@ -19,6 +19,7 @@ if (!isset($_SESSION['operator_id'])) {
             $Discount_value = $Sub_Total * $Discount / 100;
             $Final_Total = $row['a_r_final_total'];
             $Book_op_id = $row['op_id'];
+            $operator_uname = $row['op_uname'];
         }
     }
 
@@ -32,16 +33,6 @@ if (!isset($_SESSION['operator_id'])) {
         $Restaurant_email = $row['restaurant_email'];
     }
 
-
-    $operator_select = "SELECT * FROM `operators` WHERE `op_id` = $Book_op_id ";
-
-    $operator_select_show = mysqli_query($conn, $operator_select) or die("Query Failed operator select");
-
-    if (mysqli_num_rows($operator_select_show) > 0) {
-        while ($row = mysqli_fetch_assoc($operator_select_show)) {
-            $operator_uname = $row['op_uname'];
-        }
-    }
 
     $bill_customer_info_select = "SELECT * FROM `bill_customer_info` WHERE `cus_bill_id` = $Book_id ";
 
