@@ -32,7 +32,7 @@ if (!isset($_SESSION['admin_id'])) {
                     while ($row = mysqli_fetch_assoc($resManage)) {  ?>
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4">
-                                <h4 class="mb-4">Today Time Management</h4>
+                                <h4 class="mb-4 text-warning">Today Time Management</h4>
                                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                                     <div class="form-group">
                                         <input type="hidden" name="a_manag_id" class="form-control" value="<?php echo $row['a_manag_id']; ?>">
@@ -87,7 +87,7 @@ if (!isset($_SESSION['admin_id'])) {
 
                 if (mysqli_num_rows($Restaurant_day_time_Manage_Show) > 0) {
                     ?>
-                    <h3 class="text-center">Open and Close Time Management</h3>
+                    <h3 class="text-center text-warning">Open and Close Time Management</h3>
                     <?php
                     while ($row = mysqli_fetch_assoc($Restaurant_day_time_Manage_Show)) {
                     ?>
@@ -98,7 +98,7 @@ if (!isset($_SESSION['admin_id'])) {
 
                                     <input type="hidden" name="res_time_id" class="form-control" value="<?php echo $row['res_time_id']; ?>">
 
-                                    <p class="text-center text-dark fs-4"><?php echo $row['res_days']; ?>:</p>
+                                    <p class="text-center text-warning fs-4"><?php echo $row['res_days']; ?>:</p>
 
                                     <input type="text" pattern=".{0,1000}" title="Ex : - 11:00AM - 11:00PM. open time is 11:00AM and close time is 11:00PM else holiday time input 'holiday'" data-bs-toggle="tooltip" data-bs-placement="top" name="res_time_info" class="form-control" placeholder="11:00AM - 11:00PM (time input) or holiday" value="<?php echo $row['res_time_info']; ?>" required>
 

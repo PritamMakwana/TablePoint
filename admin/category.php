@@ -40,7 +40,7 @@ if (!isset($_SESSION['admin_id'])) {
                                 <a class="btn btn-white rounded  m-1 text-warning" href='category-wise-items.php?id=<?php echo $row["cate_id"]; ?>&cate_name=<?php echo $row["cate_name"]; ?>'>items show</a>
                             </div>
                             <div>
-                                <p class="text-center text-dark fs-4"><b><?php echo $row['cate_name']; ?></b></p>
+                                <p class="text-center text-warning fs-4"><b><?php echo $row['cate_name']; ?></b></p>
                                 <p class="text-center text-body"><?php echo "items : " . $row['items']; ?> </p>
                             </div>
                             <div class="d-flex justify-content-between mt-3">

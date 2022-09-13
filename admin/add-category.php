@@ -46,7 +46,7 @@ if (!isset($_SESSION['admin_id'])) {
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4 table-card">
-                            <h6 class="mb-4">Add Category</h6>
+                            <h6 class="mb-4 text-warning fs-3">Add Category</h6>
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                                 <div class="form-group">
                                     <label>Food Category Name</label>

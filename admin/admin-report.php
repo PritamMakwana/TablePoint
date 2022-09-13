@@ -31,7 +31,7 @@ if (!isset($_SESSION['admin_id'])) {
                 <div class="row g-4 d-flex justify-content-center">
                     <div class="col-sm-12 col-md-6 col-xl-4 ">
                         <div class="bg-light rounded h-100 p-4 table-card text-center">
-                            <h3 class="mb-2">Report</h3>
+                            <h3 class="mb-2 text-warning">Report</h3>
                             <div class="d-flex justify-content-center">
                                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                                     <div class="m-3">
@@ -61,7 +61,7 @@ if (!isset($_SESSION['admin_id'])) {
                         <div class="row g-4">
                             <div class="col-12">
                                 <div class="bg-light rounded h-100 p-4 table-card">
-                                    <h3><?php echo date("d-m-Y",  strtotime($_POST['date']));; ?></h3>
+                                    <h3 class="text-warning"><?php echo date("d-m-Y",  strtotime($_POST['date']));; ?></h3>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -103,8 +103,8 @@ if (!isset($_SESSION['admin_id'])) {
                                                 }
                                                 ?>
                                                 <tr>
-                                                    <td colspan="6" class="bg-white"><?php echo "Profit on this date"; ?></td>
-                                                    <td class="bg-white"><?php echo $Total_Report; ?></td>
+                                                    <td colspan="6" class="bg-white text-warning"><?php echo "Profit on this date"; ?></td>
+                                                    <td class="bg-white text-warning"><?php echo $Total_Report; ?></td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -15,7 +15,7 @@ if (!isset($_SESSION['admin_id'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin | Menu Category </title>
+        <title>Admin | <?php echo $_GET['cate_name']; ?> </title>
     </head>
 
     <body>
@@ -57,7 +57,7 @@ if (!isset($_SESSION['admin_id'])) {
 
                                 <div class="card-body">
 
-                                    <h5 class="card-title ">
+                                    <h5 class="card-title text-warning">
                                         <?php echo wordlimit($row['item_title'], 6); ?>
                                     </h5>
                                     <div class="d-flex justify-content-between mt-3">

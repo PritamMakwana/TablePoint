@@ -44,11 +44,11 @@ if (!isset($_SESSION['admin_id'])) {
 
                                 <div class="card-body">
 
-                                    <h5 class="card-title ">
+                                    <h5 class="card-title text-warning">
                                         <?php echo wordlimit($row['item_title'], 6); ?>
                                     </h5>
                                     <div class="d-flex justify-content-between mt-3">
-                                        <p class="card-text">
+                                        <p class="card-text ">
                                             <?php echo $row['cate_name']; ?>
                                         </p>
                                         <p class="card-text">

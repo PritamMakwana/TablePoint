@@ -23,7 +23,7 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="row g-4">
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light rounded h-100 p-4 table-card">
-                        <h6 class="mb-4">Add item</h6>
+                        <h6 class="mb-4 text-warning fs-3">Add Item</h6>
                         <form action="save-items.php" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Select Category</label>

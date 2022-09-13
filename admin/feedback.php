@@ -35,7 +35,7 @@ if (!isset($_SESSION['admin_id'])) {
                 ?>
                     <div class="col-sm-12 col-md-6 col-xl-4 ">
                         <div class="bg-light rounded h-100 p-4 table-card">
-                            <div class="text-start text-black-50 fs-6">
+                            <div class="text-start text-warning fs-6">
                                 <?php echo  $row['f_cus_name'] . "<br>"; ?>
                                 <?php echo  $newDate; ?>
                             </div>

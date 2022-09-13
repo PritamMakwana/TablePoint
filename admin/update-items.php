@@ -46,7 +46,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <div class="row g-4">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4 table-card">
-                                <h6 class="mb-4">Add Table</h6>
+                                <h6 class="mb-4 text-warning fs-3">Update Item</h6>
                                 <form action="save-update-items.php" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <input type="hidden" name="item_id" class="form-control" value="<?php echo  $item_id; ?>" placeholder="">

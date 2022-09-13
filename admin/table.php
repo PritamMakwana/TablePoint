@@ -35,7 +35,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <div class="bg-light rounded h-100 p-4 table-card">
                                 <div>
                                     <p class="text-center fs-4"><img class="dash-icons m-2" src="library/icons/table.png" alt="table" /></p>
-                                    <p class="text-center text-dark fs-4">
+                                    <p class="text-center text-warning fs-4">
                                         <b><?php echo $row['t_name_or_num']; ?></b>
                                     </p>
                                 </div>

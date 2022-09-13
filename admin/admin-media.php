@@ -36,7 +36,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <div class="row g-4">
                         <div class="col-sm-12 col-xl-6">
                             <div class="bg-light rounded h-100 p-4 table-card">
-                                <h6 class="mb-4">Media Management</h6>
+                                <h3 class="mb-4 text-warning ">Media Management</h3>
                                 <form action="save-media.php" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <input type="hidden" name="res_id" class="form-control" value="<?php echo  $res_id; ?>" placeholder="">

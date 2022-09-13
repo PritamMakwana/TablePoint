@@ -44,7 +44,7 @@ if (!isset($_SESSION['admin_id'])) {
             <div class="row g-4">
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light rounded h-100 p-4 table-card">
-                        <h6 class="mb-4">Add Table</h6>
+                        <h6 class="mb-4 fs-3 text-warning">Add Table</h6>
                         <!-- Form Start -->
                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
                             <div class="form-group">
