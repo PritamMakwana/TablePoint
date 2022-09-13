@@ -73,20 +73,33 @@ if (!isset($_SESSION['operator_id'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bill</title>
+        <title>Operator | Bill</title>
     </head>
 
     <body>
         <?php include "zop-sidebar.php"; ?>
-        <div class="container-fluid d-flex justify-content-center">
-            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                <h1>Customer Name<h1>
-                        <div>
-                            <input type="text" class="form-control" name="customer_name" placeholder="Customer Name" required>
+        <div class="container-fluid pt-4 px-4 mb-4">
+            <div class="row g-4 d-flex justify-content-center">
+                <p class="mb-2 text-center fs-1 text-warning">Bill Create</p>
+                <div class="col-sm-12 col-md-6 col-xl-4 ">
+                    <div class="bg-light rounded h-100 p-4 table-card text-center">
+                        <div class="d-flex justify-content-center">
+                            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                                <p class="text-warning fs-4">Customer Name</p>
+                                <div>
+                                    <input type="text" class="form-control" name="customer_name" placeholder="Customer Name" required>
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-3">
+                                    <input class=" btn btn-white rounded m-1 text-warning" type="submit" name="btn_customer_name" value="Create Bill">
+                                </div>
+                            </form>
                         </div>
-                        <input type="submit" name="btn_customer_name" class="btn btn-outline-primary">
-            </form>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <?php
         if (isset($_POST['btn_customer_name'])) {
             $CustomerName = mysqli_real_escape_string($conn, $_POST['customer_name']);

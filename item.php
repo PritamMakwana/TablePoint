@@ -31,7 +31,7 @@ if (!isset($_SESSION['customer_id'])) {
         </form>
     <?php
     if (isset($_POST['logout'])) {
-        session_destroy();
+        unset($_SESSION['customer_id']);
         header("Location: {$homename}/index.php");
     }
 } ?>
