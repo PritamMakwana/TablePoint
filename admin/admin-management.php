@@ -30,7 +30,7 @@ if (!isset($_SESSION['admin_id'])) {
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4 table-card">
-                            <h4 class="mb-4">Restaurant Management</h4>
+                            <h3 class="mb-4 text-warning">Restaurant Management</h3>
                             <?php
                             while ($row = mysqli_fetch_assoc($resManage)) {  ?>
                                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
