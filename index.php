@@ -4,6 +4,20 @@ if (isset($_SESSION['customer_id'])) {
     header("Location: {$homename}/item.php");
 } else {
 
+    $sManage = "SELECT * FROM `admin_manage`";
+    $resManage = mysqli_query($conn, $sManage) or die("Query Faild Management." . $sManage . mysqli_connect_error());
+
+    while ($row = mysqli_fetch_assoc($resManage)) {
+        $Restaurant_Name = $row['restaurant_name'];
+    }
+
+    $smedia = "SELECT * FROM `restaurant_media`";
+    $resmedia = mysqli_query($conn, $smedia) or die("Query Faild Media Management." . $smedia . mysqli_connect_error());
+
+    while ($row1 = mysqli_fetch_assoc($resmedia)) {
+        $Restaurant_logo = $row1['m_logo'];
+    }
+
 ?>
     <!doctype html>
     <html lang="en">
@@ -57,75 +71,75 @@ if (isset($_SESSION['customer_id'])) {
 
             <div class="col rightbg">
                 <div class="rightbox">
-                    <div class="txtwelcome">Welcome to <br> TablePoint</div>
-                    <div class="logo"><img src="./images/logo.png" alt="TablePoint">
-                    </div>
+                    <div class="txtwelcome text-break">Welcome to <br><?php echo $Restaurant_Name;  ?></div>
+                    <div class="logo"><img src="admin/admin_upload/<?php echo  $Restaurant_logo; ?>" alt="<?php echo $Restaurant_Name;  ?>" width="200" height="200"> </div>
                 </div>
             </div>
+        </div>
 
 
 
-            <!-- form backend -->
-            <?php
-            if (isset($_POST['login'])) {
-                if (empty($_POST['CL_Uname']) || empty($_POST['CL_password'])) {
-                    if (empty($_POST['CL_Uname'])) {
-                        header("Location:{$homename}/index.php?error=Username Or Mobile number Name is required");
-                    } elseif (empty($_POST['Admin_password'])) {
-                        header("Location:{$homename}/index.php?error=Password is required ");
-                    }
+        <!-- form backend -->
+        <?php
+        if (isset($_POST['login'])) {
+            if (empty($_POST['CL_Uname']) || empty($_POST['CL_password'])) {
+                if (empty($_POST['CL_Uname'])) {
+                    header("Location:{$homename}/index.php?error=Username Or Mobile number Name is required");
+                } elseif (empty($_POST['Admin_password'])) {
+                    header("Location:{$homename}/index.php?error=Password is required ");
+                }
+            } else {
+
+                function validation($data)
+                {
+                    $data = trim($data);
+                    $data = stripslashes($data);
+                    $data = htmlspecialchars($data);
+                    return $data;
+                }
+
+                $userName = validation(mysqli_real_escape_string($conn, $_POST['CL_Uname']));
+                $userPassword = validation(mysqli_real_escape_string($conn, $_POST['CL_password']));
+
+                $sql = "SELECT * FROM `customer_login` WHERE `l_pwd` = '$userPassword' AND (`l_uname` = '$userName' OR `l_mobile` = '$userName')";
+
+                $result = mysqli_query($conn, $sql) or die("Query Failed.");
+
+                if (mysqli_num_rows($result) > 0) {
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+
+                        $_SESSION["customer_id"] = $row['l_id'];
+        ?>
+                        <script>
+                            window.location.href = '<?php $homename ?>item.php';
+                        </script>
+    <?php }
                 } else {
-
-                    function validation($data)
-                    {
-                        $data = trim($data);
-                        $data = stripslashes($data);
-                        $data = htmlspecialchars($data);
-                        return $data;
-                    }
-
-                    $userName = validation(mysqli_real_escape_string($conn, $_POST['CL_Uname']));
-                    $userPassword = validation(mysqli_real_escape_string($conn, $_POST['CL_password']));
-
-                    $sql = "SELECT * FROM `customer_login` WHERE `l_pwd` = '$userPassword' AND (`l_uname` = '$userName' OR `l_mobile` = '$userName')";
-
-                    $result = mysqli_query($conn, $sql) or die("Query Failed.");
-
-                    if (mysqli_num_rows($result) > 0) {
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-
-                            $_SESSION["customer_id"] = $row['l_id'];
-            ?>
-                            <script>
-                                window.location.href = '<?php $homename ?>item.php';
-                            </script>
-        <?php }
+                    if (is_numeric($_POST['CL_Uname']) == 1) {
+                        header("Location:{$homename}/index.php?error=Invalid Mobile Number or Password ");
                     } else {
-                        if (is_numeric($_POST['CL_Uname']) == 1) {
-                            header("Location:{$homename}/index.php?error=Invalid Mobile Number or Password ");
-                        } else {
-                            header("Location:{$homename}/index.php?error=Invalid Username or Password ");
-                        }
+                        header("Location:{$homename}/index.php?error=Invalid Username or Password ");
                     }
                 }
             }
         }
-        ?>
-        <script>
-            function showPass() {
-                var x = document.getElementById("myInputPass");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
-                    x.type = "password";
-                }
+    }
+    ?>
+    <script>
+        function showPass() {
+            var x = document.getElementById("myInputPass");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
             }
+        }
 
-            function erorrClose() {
-                window.location.href = '<?php $homename ?>index.php';
-            }
-        </script>
+        function erorrClose() {
+            window.location.href = '<?php $homename ?>index.php';
+        }
+    </script>
     </body>
 
     </html>

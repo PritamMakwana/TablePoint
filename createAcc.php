@@ -4,6 +4,20 @@ if (isset($_SESSION['customer_id'])) {
     header("Location: {$homename}/item.php");
 } else {
 
+    $sManage = "SELECT * FROM `admin_manage`";
+    $resManage = mysqli_query($conn, $sManage) or die("Query Faild Management." . $sManage . mysqli_connect_error());
+
+    while ($row = mysqli_fetch_assoc($resManage)) {
+        $Restaurant_Name = $row['restaurant_name'];
+    }
+
+    $smedia = "SELECT * FROM `restaurant_media`";
+    $resmedia = mysqli_query($conn, $smedia) or die("Query Faild Media Management." . $smedia . mysqli_connect_error());
+
+    while ($row1 = mysqli_fetch_assoc($resmedia)) {
+        $Restaurant_logo = $row1['m_logo'];
+    }
+
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -57,65 +71,65 @@ if (isset($_SESSION['customer_id'])) {
             </div>
             <div class="col rightbg">
                 <div class="rightbox">
-                    <div class="txtwelcome">Welcome to <br> TablePoint</div>
-                    <div class="logo"><img src="./images/logo.png" alt="TablePoint">
-                    </div>
+                    <div class="txtwelcome text-break">Welcome to <br><?php echo $Restaurant_Name;  ?></div>
+                    <div class="logo"><img src="admin/admin_upload/<?php echo  $Restaurant_logo; ?>" alt="<?php echo $Restaurant_Name;  ?>" width="200" height="200"> </div>
                 </div>
             </div>
+        </div>
 
 
-        <?php
-        if (isset($_POST['create_Account'])) {
-            if (empty($_POST["C_Mobile"]) || empty($_POST["C_Uname"]) || empty($_POST["C_Password"]) == " ") {
-                header("Location:{$homename}/createAcc.php?error=All Fields must be entered");
+    <?php
+    if (isset($_POST['create_Account'])) {
+        if (empty($_POST["C_Mobile"]) || empty($_POST["C_Uname"]) || empty($_POST["C_Password"]) == " ") {
+            header("Location:{$homename}/createAcc.php?error=All Fields must be entered");
+        } else {
+            $userMoblie = mysqli_real_escape_string($conn, $_POST['C_Mobile']);
+            $userUname = mysqli_real_escape_string($conn, $_POST['C_Uname']);
+            $userPassword = mysqli_real_escape_string($conn, $_POST['C_Password']);
+
+            // already Username or mobile number registration check 
+            $sqluser = "SELECT * FROM `customer_login` WHERE l_uname = '{$userUname}'";
+            $sqlmoblie = "SELECT * FROM `customer_login` WHERE l_mobile = '{$userMoblie}'";
+
+            $resultuser = mysqli_query($conn, $sqluser) or die("Query Failed .");
+            $resultmoblie = mysqli_query($conn, $sqlmoblie) or die("Query Failed .");
+
+            if (mysqli_num_rows($resultuser) > 0) {
+                if (mysqli_fetch_assoc($resultuser)) {
+                    header("Location:{$homename}/createAcc.php?error= already Username registration ");
+                }
+            } else if (mysqli_num_rows($resultmoblie) > 0) {
+                if (mysqli_fetch_assoc($resultmoblie)) {
+                    header("Location:{$homename}/createAcc.php?error= already Mobile number registration");
+                }
             } else {
-                $userMoblie = mysqli_real_escape_string($conn, $_POST['C_Mobile']);
-                $userUname = mysqli_real_escape_string($conn, $_POST['C_Uname']);
-                $userPassword = mysqli_real_escape_string($conn, $_POST['C_Password']);
 
-                // already Username or mobile number registration check 
-                $sqluser = "SELECT * FROM `customer_login` WHERE l_uname = '{$userUname}'";
-                $sqlmoblie = "SELECT * FROM `customer_login` WHERE l_mobile = '{$userMoblie}'";
+                //insert Data
+                $sqlInsert = "INSERT INTO `customer_login`(`l_mobile`, `l_uname`, `l_pwd`) VALUES ( '$userMoblie','$userUname','$userPassword' )";
 
-                $resultuser = mysqli_query($conn, $sqluser) or die("Query Failed .");
-                $resultmoblie = mysqli_query($conn, $sqlmoblie) or die("Query Failed .");
-
-                if (mysqli_num_rows($resultuser) > 0) {
-                    if (mysqli_fetch_assoc($resultuser)) {
-                        header("Location:{$homename}/createAcc.php?error= already Username registration ");
-                    }
-                } else if (mysqli_num_rows($resultmoblie) > 0) {
-                    if (mysqli_fetch_assoc($resultmoblie)) {
-                        header("Location:{$homename}/createAcc.php?error= already Mobile number registration");
-                    }
+                if (mysqli_query($conn, $sqlInsert)) {
+                    header("Location: {$homename}/index.php");
                 } else {
-
-                    //insert Data
-                    $sqlInsert = "INSERT INTO `customer_login`(`l_mobile`, `l_uname`, `l_pwd`) VALUES ( '$userMoblie','$userUname','$userPassword' )";
-
-                    if (mysqli_query($conn, $sqlInsert)) {
-                        header("Location: {$homename}/index.php");
-                    } else {
-                        header("Location:{$homename}/createAcc.php?error=sorry! server side problem please input again");
-                    }
+                    header("Location:{$homename}/createAcc.php?error=sorry! server side problem please input again");
                 }
             }
         }
-    }       ?>
-        <script>
-            function showPass() {
-                var x = document.getElementById("myInputPass");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
-                    x.type = "password";
-                }
+    }
+}       ?>
+    <script>
+        function showPass() {
+            var x = document.getElementById("myInputPass");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
             }
+        }
 
-            function erorrClose() {
-                window.location.href = '<?php $homename ?>createAcc.php';
-            }
-        </script>
+        function erorrClose() {
+            window.location.href = '<?php $homename ?>createAcc.php';
+        }
+    </script>
 
     </body>
 
