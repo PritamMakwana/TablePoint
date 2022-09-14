@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 if (isset($_SESSION['customer_id'])) {
-    header("Location: {$homename}/item.php");
+    header("Location: {$homename}/home.php");
 } else {
 
     $sManage = "SELECT * FROM `admin_manage`";
@@ -112,7 +112,7 @@ if (isset($_SESSION['customer_id'])) {
                         $_SESSION["customer_id"] = $row['l_id'];
         ?>
                         <script>
-                            window.location.href = '<?php $homename ?>item.php';
+                            window.location.href = '<?php $homename ?>home.php';
                         </script>
     <?php }
                 } else {
