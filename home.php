@@ -25,8 +25,8 @@ if (!isset($_SESSION['customer_id'])) {
             <div class="container my-5 py-5">
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6 text-center text-lg-start">
-                        <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
-                        <p class="text-white animated slideInLeft mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <h1 class="display-3 text-white animated slideInLeft">Welcome For <br>Restaurant</h1>
+                        <p class="text-white animated slideInLeft mb-4 pb-2">Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.</p>
                         <a href="#book" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A Table</a>
                     </div>
                     <div class="col-lg-6 text-center text-lg-end overflow-hidden">
@@ -36,7 +36,6 @@ if (!isset($_SESSION['customer_id'])) {
             </div>
         </div>
 
-        </div>
         <!-- header end -->
         <!-- booking table -->
         <?php
@@ -263,9 +262,6 @@ if (!isset($_SESSION['customer_id'])) {
         </div>
         <?php include "footer.php"; ?>
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-        </div>
     <?php
 }
     ?>

@@ -119,7 +119,11 @@ if (!isset($_SESSION['customer_id'])) {
                                         $sqlmob = "UPDATE `customer_login` SET `l_mobile`='$old_cmob' WHERE `l_id`='$old_cid'";
                                         $resultmob =  mysqli_query($conn, $sqlmob) or die("Query Failed update.");
                                         if ($resultmob) {
-                                            header("Location:{$homename}/profile.php?id={$_SESSION["customer_id"]}&error=mobile number is already");
+                    ?>
+                                            <script>
+                                                window.location.href = '<?php $homename ?>profile.php?id={<?php echo $_SESSION["customer_id"]; ?>}&error=mobile number is already';
+                                            </script>
+                                        <?php
                                         }
                                     }
                                 }
@@ -128,13 +132,16 @@ if (!isset($_SESSION['customer_id'])) {
                                         $sqluname = "UPDATE `customer_login` SET `l_uname`='$old_cuname' WHERE `l_id`='$old_cid'";
                                         $resultuname =  mysqli_query($conn, $sqluname) or die("Query Failed update.");
                                         if ($resultuname) {
-                                            header("Location:{$homename}/profile.php?id={$_SESSION["customer_id"]}&error=username is already");
+                                        ?>
+                                            <script>
+                                                window.location.href = '<?php $homename ?>profile.php?id={<?php echo $_SESSION["customer_id"]; ?>}&error=username is already';
+                                            </script>
+                                <?php
                                         }
                                     }
                                 }
                             } else {
-                                header("Location:{$homename}/home.php");
-                    ?>
+                                ?>
                                 <script>
                                     window.location.href = '<?php $homename ?>profile.php';
                                 </script>
@@ -147,28 +154,24 @@ if (!isset($_SESSION['customer_id'])) {
 
                     <?php include "footer.php"; ?>
 
-                    <!--Back to Top-->
-                    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
-                        <i class="bi bi-arrow-up">
-                        </i></a>
-        </div>
-    <?php
-}
-    ?>
-    <script>
-        function showPass() {
-            var x = document.getElementById("myInputPass");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
 
-        function erorrClose() {
-            window.location.href = '<?php $homename ?>profile.php';
-        }
-    </script>
+                <?php
+            }
+                ?>
+                <script>
+                    function showPass() {
+                        var x = document.getElementById("myInputPass");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
+                    }
+
+                    function erorrClose() {
+                        window.location.href = '<?php $homename ?>profile.php';
+                    }
+                </script>
 
     </body>
 

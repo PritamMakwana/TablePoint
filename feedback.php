@@ -34,7 +34,7 @@ if (!isset($_SESSION['customer_id'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>feedback</title>
+        <title>Customer | Feedback</title>
     </head>
 
     <body>
@@ -136,9 +136,6 @@ if (!isset($_SESSION['customer_id'])) {
 
         <?php include "footer.php"; ?>
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-        </div>
     <?php
 }
     ?>

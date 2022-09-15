@@ -58,9 +58,8 @@ if (!isset($_SESSION['customer_id'])) {
                         </div>
                         <div class="col-lg-6">
                             <h5 class="section-title ff-secondary text-start text-primary fw-normal">About Us</h5>
-                            <h1 class="mb-4">Welcome to <i class="fa fa-utensils text-primary me-2"></i>Restoran</h1>
-                            <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos erat ipsum et lorem et sit, sed stet lorem sit.</p>
-                            <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                            <h1 class="mb-4">Welcome to <i class="fa fa-utensils text-primary me-2"></i>Restaurant</h1>
+                            <p class="mb-4">Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.Menu is extensive and seasonal to a particularly high standard.</p>
                             <div class="row g-4 mb-4">
                                 <div class="col-sm-6">
                                     <div class="d-flex align-items-center border-start border-5 border-primary px-3">
@@ -90,12 +89,9 @@ if (!isset($_SESSION['customer_id'])) {
 
             <?php include "footer.php"; ?>
 
-            <!-- Back to Top -->
-            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-        </div>
-    <?php
-}
-    ?>
+        <?php
+    }
+        ?>
 
     </body>
 
