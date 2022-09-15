@@ -74,7 +74,7 @@ if (!isset($_SESSION['customer_id'])) {
             <!-- feedback select -->
 
             <?php
-            $limit = 3;
+            $limit = 5;
             if (isset($_GET['page'])) {
                 $page = $_GET['page'];
             } else {
@@ -96,9 +96,9 @@ if (!isset($_SESSION['customer_id'])) {
                 ?>
                 <div class="card feedback-card m-2 from-control" style="width: 100%;">
                     <div class="card-body">
-                        <small class="card-title text-warning text-break"><?php echo $row['f_cus_name']; ?></small>
+                        <small class="card-title text-warning fs-3 text-break"><?php echo $row['f_cus_name']; ?></small>
                         <small class="card-title text-warning text-break"> <?php echo $newDate; ?></small>
-                        <p class="card-text text-break "><?php echo $row['f_desc']; ?></p>
+                        <p class="card-text text-break fs-5"><?php echo $row['f_desc']; ?></p>
                     </div>
                 </div>
 

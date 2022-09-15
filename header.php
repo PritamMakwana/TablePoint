@@ -69,7 +69,7 @@ while ($row1 = mysqli_fetch_assoc($resmedia)) {
                         <a href="menu.php" class="nav-item nav-link">Menu</a>
                         <a href="feedback.php" class="nav-item nav-link">Feedback</a>
                         <a href="about.php" class="nav-item nav-link">About</a>
-                        <a href="table-booking.php" class="nav-item nav-link">Table Booking</a>
+                        <a href="profile.php" class="nav-item nav-link">Profile</a>
                     </div>
                     <a href="logout.php" class="btn btn-primary py-2 px-4">logout</a>
                 </div>
