@@ -14,7 +14,7 @@ if (!isset($_SESSION['customer_id'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>item</title>
+        <title>Customer | Home</title>
     </head>
 
     <body>
@@ -37,7 +37,7 @@ if (!isset($_SESSION['customer_id'])) {
         </div>
 
         </div>
-
+        <!-- header end -->
         <!-- booking table -->
         <?php
         $Admin_manage_select = "SELECT * FROM `admin_manage`";

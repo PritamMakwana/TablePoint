@@ -66,19 +66,10 @@ while ($row1 = mysqli_fetch_assoc($resmedia)) {
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="home.php" class="nav-item nav-link active">Home</a>
-                        <a href="table-booking.php" class="nav-item nav-link">Table Booking</a>
+                        <a href="menu.php" class="nav-item nav-link">Menu</a>
                         <a href="feedback.php" class="nav-item nav-link">Feedback</a>
                         <a href="about.php" class="nav-item nav-link">About</a>
-                        <a href="menu.html" class="nav-item nav-link">Menu</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="booking.html" class="dropdown-item">Booking</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="table-booking.php" class="nav-item nav-link">Table Booking</a>
                     </div>
                     <a href="logout.php" class="btn btn-primary py-2 px-4">logout</a>
                 </div>
