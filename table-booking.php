@@ -33,6 +33,7 @@ if (!isset($_SESSION['customer_id'])) {
         <?php
         include "header.php";
         ?>
+        </div>
 
         <?php
 
@@ -137,7 +138,8 @@ if (!isset($_SESSION['customer_id'])) {
         }
         ?>
 
-    <?php } ?>
+      
+        <?php } ?>
     </body>
 
     </html>
